@@ -15,19 +15,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
-    "react-app",
-    "react-app/jest",
-    "plugin:prettier/recommended"
+      "react-app",
+      "react-app/jest",
+      "plugin:prettier/recommended"
     ],
     "plugins": [
-    "eslint-plugin-import",
-    "prettier"
+      "eslint-plugin-import",
+      "prettier"
     ]
-    },
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -43,6 +45,8 @@
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.5.1"
-  }
+  },
+  "homepage": "https://cr1of0x.github.io/trello-app/"
 }
