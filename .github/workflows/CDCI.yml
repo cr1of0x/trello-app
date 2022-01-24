@@ -18,7 +18,7 @@ jobs:
       - run: npm run build
       - run: npm test
       - name: deploy
-        uses: cr1of0x/trello-app
+        uses: cr1of0x/trello-app@v1
         with:
           target_branch: gh-pages
           build_dir: build
