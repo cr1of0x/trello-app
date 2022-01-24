@@ -17,7 +17,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm test
-      - name: Deploy
+      - name: deploy
         uses: criofox/ghaction-github-pages@v1
         with:
           target_branch: gh-pages
