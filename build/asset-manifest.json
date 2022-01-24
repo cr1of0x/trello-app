@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.addd6654.js",
-    "index.html": "/index.html",
-    "main.addd6654.js.map": "/static/js/main.addd6654.js.map"
+    "main.js": "/trello-app/static/js/main.addd6654.js",
+    "index.html": "/trello-app/index.html",
+    "main.addd6654.js.map": "/trello-app/static/js/main.addd6654.js.map"
   },
   "entrypoints": [
     "static/js/main.addd6654.js"
