@@ -2,7 +2,7 @@ name: Node.js CI
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build-test-deploy:
@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: "16.x"
       - run: yarn --ignore-engines
+      - run: yarn eslint "./src/**/*" —ext .js.jsx.ts.tsx —fix
       - run: yarn build
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v1
