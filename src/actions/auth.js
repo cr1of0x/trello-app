@@ -1,13 +1,13 @@
-import { AUTH } from "../constants/actionTypes";
+import { AUTH, EMAIL } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
 export const signup = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
 
-    dispatch({ type: AUTH, data });
+    dispatch({ type: EMAIL, data });
 
-    navigate("/dashboard");
+    navigate("/confirmemail");
   } catch (error) {
     console.log(error);
   }

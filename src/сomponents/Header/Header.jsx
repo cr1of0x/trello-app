@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-export const Header = ({ user, setUser }) => {
+export const Header = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
-    navigate("/");
     setUser(null);
+    navigate("/");
   };
 
   useEffect(() => {
-    // const token = user?.token;
-    // JWT...
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
