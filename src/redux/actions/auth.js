@@ -1,5 +1,5 @@
-import { AUTH, EMAIL } from "../constants/actionTypes";
-import * as api from "../api/index.js";
+import * as api from "../../api/index.js";
+import { AUTH, EMAIL } from "../constants/actionTypes.js";
 
 export const signup = (formData, navigate) => async (dispatch) => {
   try {

@@ -2,25 +2,19 @@ import { useState } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signin } from "../../actions/auth";
+import { Input } from "../../сomponents/Input/Input";
 import styles from "./LoginForm.module.css";
 
-export const LoginForm = () => {
+const initailState = {
+  email: "",
+  password: "",
+};
+
+export const LoginForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const initailState = {
-    email: "",
-    password: "",
-  };
-
   const [formData, setFormData] = useState(initailState);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    dispatch(signin(formData, navigate));
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,20 +38,52 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className={styles.loginform} onSubmit={handleSubmit}>
-      <label>E-mail</label>
-      <input name="email" type="email" onChange={handleChange}></input>
-      <label>Password</label>
-      <input name="password" type="password" onChange={handleChange}></input>
-      <input type="submit" value="Sign In"></input>
+    <form
+      className={styles.loginform}
+      onSubmit={(e) => {
+        handleSubmit(e, formData);
+      }}
+    >
+      <h2 className={styles.title}>Sigh In to Trello</h2>
+
       <GoogleLogin
+        className={styles.google}
         clientId="782945626586-3o5bloqn75gbklfkk1bmqt4ik6jd6uhv.apps.googleusercontent.com"
-        buttonText="Google Sign In"
+        buttonText=""
         on
         onSuccess={googleSucess}
         onFailure={googleFailure}
         cookiePolicy="single_host_origin"
       />
+      <div className={styles.inputgroup}>
+        <Input
+          className={styles.input}
+          name="email"
+          type="email"
+          onChange={(e) => {
+            handleChange(e);
+          }}
+        />
+        <span className={styles.highlight}></span>
+        <span className={styles.bar}></span>
+        <label className={styles.label}>Email</label>
+      </div>
+
+      <div className={styles.inputgroup}>
+        <Input
+          className={styles.input}
+          name="password"
+          type="password"
+          onChange={(e) => {
+            handleChange(e);
+          }}
+        />
+        <span className={styles.highlight}></span>
+        <span className={styles.bar}></span>
+        <label className={styles.label}>Password</label>
+      </div>
+
+      <Input className={styles.submit} type="submit" value="Sign In" />
     </form>
   );
 };

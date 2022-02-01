@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RegisterForm from "./forms/RegisterForm/RegisterForm";
-import { LoginPage } from "./pages/LoginPage";
-import { Dashboard } from "./сomponents/Dashboard/Dashboard";
-import { Header } from "./сomponents/Header/Header";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
+import { Header } from "./pages/Header/Header";
 
 export const App = () => {
   return (
@@ -11,7 +10,7 @@ export const App = () => {
       <Header />
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/registration" element={<RegisterForm />} />
+        <Route path="/registration" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route exact path="/" element={<div>Homepage</div>} />
         <Route
