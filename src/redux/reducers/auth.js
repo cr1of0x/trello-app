@@ -1,15 +1,25 @@
-import { AUTH, LOGOUT, EMAIL } from "../constants/actionTypes";
+import {
+  AUTH,
+  LOGOUT,
+  EMAIL,
+  SHOW_LOADER,
+  HIDE_LOADER,
+} from "../constants/actionTypes";
 
-const authReducer = (state = { authData: null }, action) => {
+const authReducer = (state = { authData: null, loading: false }, action) => {
   switch (action.type) {
     case AUTH:
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      localStorage.setItem("token", JSON.stringify({ ...action?.data.token }));
       return { ...state, authData: action?.data };
     case LOGOUT:
-      localStorage.clear();
+      localStorage.removeItem("token");
       return { ...state, authData: null };
     case EMAIL:
       return { ...state, authData: action?.data };
+    case SHOW_LOADER:
+      return { ...state, loading: true };
+    case HIDE_LOADER:
+      return { ...state, loading: false };
     default:
       return state;
   }

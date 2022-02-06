@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./Header.module.css";
+import { login, registration } from "../../routes";
 
 export const Header = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,11 +14,11 @@ export const Header = () => {
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     setUser(null);
-    navigate("/");
+    navigate(login);
   };
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile")));
+    setUser(JSON.parse(localStorage.getItem("token")));
   }, [location]);
 
   return (
@@ -29,10 +30,10 @@ export const Header = () => {
         </button>
       ) : (
         <div className={styles.nav}>
-          <Link to="/registration">
+          <Link to={registration}>
             <button className={styles.button}>Sign Up</button>
           </Link>
-          <Link to="/login">
+          <Link to={login}>
             <button className={styles.button}>Login</button>
           </Link>
         </div>

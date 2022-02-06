@@ -44,7 +44,7 @@ export const LoginForm = ({ handleSubmit }) => {
         handleSubmit(e, formData);
       }}
     >
-      <h2 className={styles.title}>Sigh In to Trello</h2>
+      <h2 className={styles.title}>Sign In</h2>
 
       <GoogleLogin
         className={styles.google}
@@ -55,35 +55,36 @@ export const LoginForm = ({ handleSubmit }) => {
         onFailure={googleFailure}
         cookiePolicy="single_host_origin"
       />
-      <div className={styles.inputgroup}>
-        <Input
-          className={styles.input}
-          name="email"
-          type="email"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        />
-        <span className={styles.highlight}></span>
-        <span className={styles.bar}></span>
-        <label className={styles.label}>Email</label>
-      </div>
 
-      <div className={styles.inputgroup}>
-        <Input
-          className={styles.input}
-          name="password"
-          type="password"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        />
-        <span className={styles.highlight}></span>
-        <span className={styles.bar}></span>
-        <label className={styles.label}>Password</label>
-      </div>
+      <Input
+        className={styles.input}
+        name="email"
+        type="email"
+        onChange={(e) => {
+          handleChange(e);
+        }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Email"
+      />
 
-      <Input className={styles.submit} type="submit" value="Sign In" />
+      <Input
+        className={styles.input}
+        name="password"
+        type="password"
+        onChange={(e) => {
+          handleChange(e);
+        }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Password"
+      />
+
+      <input className={styles.submit} type="submit" value="Sign In" />
     </form>
   );
 };

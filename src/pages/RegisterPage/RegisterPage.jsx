@@ -8,19 +8,10 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e, formData, setError) => {
+  const handleSubmit = async (e, formData, setError, errors) => {
     e.preventDefault();
 
-    const decimal =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-
-    if (!formData.password.match(decimal)) {
-      setError(
-        "Password need to contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"
-      );
-      return false;
-    }
-    dispatch(signup(formData, navigate));
+    dispatch(signup(formData, navigate, setError));
   };
   return (
     <div className={styles.login}>

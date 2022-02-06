@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Input } from "../../сomponents/Input/Input";
+import { dashboard } from "../../routes";
 
-const initailState = {
+const initialState = {
   login: "",
   email: "",
   password: "",
@@ -15,20 +16,21 @@ const initailState = {
 const RegisterForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(initailState);
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState(initialState);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const googleSucess = async (res) => {
-    const result = res?.profileObj.email;
+    const result = res?.profileObj;
     const token = res?.tokenId;
 
     try {
+      console.log(result);
       dispatch({ type: "AUTH", data: { result, token } });
-      navigate("/dashboard");
+      navigate(dashboard);
     } catch (error) {
       console.log(error);
     }
@@ -42,10 +44,10 @@ const RegisterForm = ({ handleSubmit }) => {
     <form
       className={styles.registerform}
       onSubmit={(e) => {
-        handleSubmit(e, formData, setError);
+        handleSubmit(e, formData, setErrors);
       }}
     >
-      <h2 className={styles.title}>Sigh In to Trello</h2>
+      <h2 className={styles.title}>Sign Up to Trello</h2>
 
       <GoogleLogin
         clientId="782945626586-3o5bloqn75gbklfkk1bmqt4ik6jd6uhv.apps.googleusercontent.com"
@@ -56,68 +58,70 @@ const RegisterForm = ({ handleSubmit }) => {
         cookiePolicy="single_host_origin"
       />
 
-      <div className={styles.inputgroup}>
-        <Input
-          className={styles.input}
-          name="login"
-          type="login"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          minLength={5}
-          maxLength={10}
-        />
-        <span className={styles.highlight}></span>
-        <span className={styles.bar}></span>
-        <label className={styles.label}>Login</label>
-      </div>
+      <Input
+        className={styles.input}
+        name="login"
+        type="login"
+        onChange={(e) => {
+          handleChange(e);
+        }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Login"
+        errorClass={styles.error}
+        errorValue={errors.login}
+      />
 
-      <div className={styles.inputgroup}>
-        <Input
-          className={styles.input}
-          name="email"
-          type="email"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        />
-        <span className={styles.highlight}></span>
-        <span className={styles.bar}></span>
-        <label className={styles.label}>Email</label>
-      </div>
-      <div className={styles.inputgroup}>
-        <Input
-          className={styles.input}
-          name="password"
-          type="password"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          minLength={8}
-          maxLength={15}
-        />
-        <span className={styles.highlight}></span>
-        <span className={styles.bar}></span>
-        <label className={styles.label}>Password</label>
-      </div>
+      <Input
+        className={styles.input}
+        name="email"
+        onChange={(e) => {
+          handleChange(e);
+        }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Email"
+        errorClass={styles.error}
+        errorValue={errors.email}
+      />
 
-      <div className={styles.inputgroup}>
-        <Input
-          className={styles.input}
-          name="confirmPassword"
-          type="password"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          minLength={8}
-          maxLength={15}
-        />
-        <span className={styles.highlight}></span>
-        <span className={styles.bar}></span>
-        <label className={styles.label}>Confirm Password</label>
-      </div>
-      <div className={styles.error}>{error}</div>
-      <Input className={styles.submit} type="submit" value="SignUp" />
+      <Input
+        className={styles.input}
+        name="password"
+        type="password"
+        onChange={(e) => {
+          handleChange(e);
+        }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Password"
+        errorClass={styles.error}
+        errorValue={errors.password}
+      />
+
+      <Input
+        className={styles.input}
+        name="confirmPassword"
+        type="password"
+        onChange={(e) => {
+          handleChange(e);
+        }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Confirm Password"
+        errorClass={styles.error}
+        errorValue={errors.confirmPassword}
+      />
+
+      <input className={styles.submit} type="submit" value="SignUp" />
     </form>
   );
 };

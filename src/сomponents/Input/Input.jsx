@@ -7,18 +7,30 @@ export const Input = ({
   minLength,
   maxLength,
   id,
+  wrapperClass,
+  highlightClass,
+  barClass,
+  labelClass,
+  labelValue,
+  errorClass,
+  errorValue,
 }) => {
   return (
-    <input
-      required={true}
-      className={className}
-      name={name}
-      type={type}
-      onChange={onChange}
-      value={value}
-      minLength={minLength}
-      maxLength={maxLength}
-      id={id}
-    />
+    <div className={wrapperClass}>
+      <input
+        className={className}
+        name={name}
+        type={type}
+        onChange={onChange}
+        value={value}
+        minLength={minLength}
+        maxLength={maxLength}
+        id={id}
+      />
+      <span className={highlightClass}></span>
+      <span className={barClass}></span>
+      <label className={labelClass}>{labelValue}</label>
+      <div className={errorClass}>{errorValue}</div>
+    </div>
   );
 };
