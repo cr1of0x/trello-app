@@ -1,17 +1,17 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import RegisterForm from "../../forms/RegisterForm/RegisterForm";
-import { signup } from "../../redux/actions/auth";
+import { signup } from "../../redux/thunks/auth";
 import styles from "./RegisterPage.module.css";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e, formData, setError, errors) => {
+  const handleSubmit = async (e, formData, setErrors) => {
     e.preventDefault();
 
-    dispatch(signup(formData, navigate, setError));
+    dispatch(signup(formData, navigate, setErrors));
   };
   return (
     <div className={styles.login}>

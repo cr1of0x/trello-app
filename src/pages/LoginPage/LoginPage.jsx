@@ -1,17 +1,18 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginForm } from "../../forms/LoginForm/LoginForm";
-import { signin } from "../../redux/actions/auth";
+import { signin } from "../../redux/thunks/auth";
+import { registration } from "../../routes";
 import styles from "./LoginPage.module.css";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e, formData) => {
+  const handleSubmit = (e, formData, setErrors) => {
     e.preventDefault();
 
-    dispatch(signin(formData, navigate));
+    dispatch(signin(formData, navigate, setErrors));
   };
 
   return (
@@ -19,7 +20,7 @@ export const LoginPage = () => {
       <LoginForm handleSubmit={handleSubmit} />
       <div className={styles.infoblock}>
         <h3 className={styles.info}>Don't have account? You can Sign Up</h3>
-        <Link to="/registration">
+        <Link to={registration}>
           <button className={styles.button}>Sign Up</button>
         </Link>
       </div>

@@ -4,9 +4,6 @@ export const Input = ({
   type,
   onChange,
   value,
-  minLength,
-  maxLength,
-  id,
   wrapperClass,
   highlightClass,
   barClass,
@@ -23,9 +20,6 @@ export const Input = ({
         type={type}
         onChange={onChange}
         value={value}
-        minLength={minLength}
-        maxLength={maxLength}
-        id={id}
       />
       <span className={highlightClass}></span>
       <span className={barClass}></span>

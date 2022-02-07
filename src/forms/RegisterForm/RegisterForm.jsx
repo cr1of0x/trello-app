@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Input } from "../../сomponents/Input/Input";
 import { dashboard } from "../../routes";
+import { auth } from "../../redux/actions/actions";
 
 const initialState = {
   login: "",
@@ -29,7 +30,7 @@ const RegisterForm = ({ handleSubmit }) => {
 
     try {
       console.log(result);
-      dispatch({ type: "AUTH", data: { result, token } });
+      dispatch(auth({ result, token }));
       navigate(dashboard);
     } catch (error) {
       console.log(error);
@@ -50,7 +51,7 @@ const RegisterForm = ({ handleSubmit }) => {
       <h2 className={styles.title}>Sign Up to Trello</h2>
 
       <GoogleLogin
-        clientId="782945626586-3o5bloqn75gbklfkk1bmqt4ik6jd6uhv.apps.googleusercontent.com"
+        clientId={process.env.REACT_APP_GOOGLE_ID}
         buttonText=""
         className={styles.google}
         onSuccess={googleSucess}

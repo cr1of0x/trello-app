@@ -2,6 +2,8 @@ import { useState } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../redux/actions/actions";
+import { dashboard } from "../../routes";
 import { Input } from "../../сomponents/Input/Input";
 import styles from "./LoginForm.module.css";
 
@@ -15,6 +17,7 @@ export const LoginForm = ({ handleSubmit }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState(initailState);
+  const [errors, setErrors] = useState(initailState);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,8 +28,8 @@ export const LoginForm = ({ handleSubmit }) => {
     const token = res?.tokenId;
 
     try {
-      dispatch({ type: "AUTH", data: { result, token } });
-      navigate("/dashboard");
+      dispatch(auth({ result, token }));
+      navigate(dashboard);
     } catch (error) {
       console.log(error);
     }
@@ -41,14 +44,14 @@ export const LoginForm = ({ handleSubmit }) => {
     <form
       className={styles.loginform}
       onSubmit={(e) => {
-        handleSubmit(e, formData);
+        handleSubmit(e, formData, setErrors);
       }}
     >
       <h2 className={styles.title}>Sign In</h2>
 
       <GoogleLogin
         className={styles.google}
-        clientId="782945626586-3o5bloqn75gbklfkk1bmqt4ik6jd6uhv.apps.googleusercontent.com"
+        clientId={process.env.REACT_APP_GOOGLE_ID}
         buttonText=""
         on
         onSuccess={googleSucess}
@@ -59,7 +62,6 @@ export const LoginForm = ({ handleSubmit }) => {
       <Input
         className={styles.input}
         name="email"
-        type="email"
         onChange={(e) => {
           handleChange(e);
         }}
@@ -68,6 +70,8 @@ export const LoginForm = ({ handleSubmit }) => {
         barClass={styles.bar}
         labelClass={styles.label}
         labelValue="Email"
+        errorClass={styles.error}
+        errorValue={errors.email}
       />
 
       <Input
@@ -82,6 +86,8 @@ export const LoginForm = ({ handleSubmit }) => {
         barClass={styles.bar}
         labelClass={styles.label}
         labelValue="Password"
+        errorClass={styles.error}
+        errorValue={errors.password}
       />
 
       <input className={styles.submit} type="submit" value="Sign In" />
