@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Input } from "../../сomponents/Input/Input";
-import { dashboard } from "../../routes";
-import { auth } from "../../redux/actions/actions";
+import { gmail } from "../../redux/thunks/auth";
 
 const initialState = {
   login: "",
   email: "",
   password: "",
   confirmPassword: "",
+  type: "email",
 };
 
 const RegisterForm = ({ handleSubmit }) => {
@@ -25,13 +25,14 @@ const RegisterForm = ({ handleSubmit }) => {
   };
 
   const googleSucess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+    const data = {
+      login: res?.profileObj.name,
+      email: res?.profileObj.email,
+      type: "google",
+    };
 
     try {
-      console.log(result);
-      dispatch(auth({ result, token }));
-      navigate(dashboard);
+      dispatch(gmail(data, navigate, setErrors));
     } catch (error) {
       console.log(error);
     }

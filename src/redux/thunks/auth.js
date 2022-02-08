@@ -36,9 +36,11 @@ export const signin = (formData, navigate, setErrors) => async (dispatch) => {
     dispatch(showLoader());
     const { data } = await api.signIn(formData);
 
-    dispatch(auth(data));
-    navigate(dashboard);
+    console.log(data);
+
+    await dispatch(auth(data));
     dispatch(hideLoader());
+    navigate(dashboard);
   } catch (error) {
     if (error.request.status === 422) {
       let message = error.response.data.error.details[0].message;
@@ -55,3 +57,52 @@ export const signin = (formData, navigate, setErrors) => async (dispatch) => {
     }
   }
 };
+
+export const gmail = (gmailData, navigate, setErrors) => async (dispatch) => {
+  try {
+    dispatch(showLoader());
+    const { data } = await api.gmail(gmailData);
+
+    dispatch(email(data));
+    navigate(confirmemail);
+    dispatch(hideLoader());
+  } catch (error) {
+    if (error.request.status === 422) {
+      let message = error.response.data.error.details[0].message;
+      let key = error.response.data.error.details[0].context.key;
+      if (key === "email") {
+        setErrors({ email: message });
+      }
+      dispatch(hideLoader());
+    } else {
+      dispatch(hideLoader());
+      return error;
+    }
+  }
+};
+
+export const gmailLogin =
+  (gmailData, navigate, setErrors) => async (dispatch) => {
+    try {
+      dispatch(showLoader());
+      const { data } = await api.gmailLogin(gmailData);
+
+      await dispatch(auth(data));
+      navigate(dashboard);
+      dispatch(hideLoader());
+    } catch (error) {
+      if (error.request.status === 422) {
+        let message = error.response.data.error.details[0].message;
+        let key = error.response.data.error.details[0].context.key;
+        if (key === "email") {
+          setErrors({ email: message });
+        } else if (key === "password") {
+          setErrors({ password: message });
+        }
+        dispatch(hideLoader());
+      } else {
+        dispatch(hideLoader());
+        return error;
+      }
+    }
+  };

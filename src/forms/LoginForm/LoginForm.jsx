@@ -2,12 +2,11 @@ import { useState } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../redux/actions/actions";
-import { dashboard } from "../../routes";
+import { gmailLogin } from "../../redux/thunks/auth";
 import { Input } from "../../сomponents/Input/Input";
 import styles from "./LoginForm.module.css";
 
-const initailState = {
+const initialState = {
   email: "",
   password: "",
 };
@@ -16,8 +15,8 @@ export const LoginForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState(initailState);
-  const [errors, setErrors] = useState(initailState);
+  const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState(initialState);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,11 +24,9 @@ export const LoginForm = ({ handleSubmit }) => {
 
   const googleSucess = async (res) => {
     const result = res?.profileObj;
-    const token = res?.tokenId;
 
     try {
-      dispatch(auth({ result, token }));
-      navigate(dashboard);
+      dispatch(gmailLogin(result, navigate, setErrors));
     } catch (error) {
       console.log(error);
     }

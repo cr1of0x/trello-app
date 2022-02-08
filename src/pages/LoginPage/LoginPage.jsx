@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginForm } from "../../forms/LoginForm/LoginForm";
 import { signin } from "../../redux/thunks/auth";
-import { registration } from "../../routes";
+import { dashboard, registration } from "../../routes";
 import styles from "./LoginPage.module.css";
 
 export const LoginPage = () => {

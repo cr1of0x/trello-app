@@ -2,6 +2,7 @@ import {
   AUTH,
   EMAIL,
   HIDE_LOADER,
+  LOGOUT,
   SHOW_LOADER,
 } from "../constants/actionTypes";
 
@@ -22,4 +23,8 @@ export const showLoader = () => {
 
 export const hideLoader = () => {
   return { type: HIDE_LOADER };
+};
+
+export const logout = () => {
+  return { type: LOGOUT };
 };

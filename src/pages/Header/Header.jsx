@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./Header.module.css";
 import { login, registration } from "../../routes";
+import { logout } from "../../redux/actions/actions";
 
 export const Header = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")));
@@ -12,7 +13,7 @@ export const Header = () => {
   const location = useLocation();
 
   const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
+    dispatch(logout());
     setUser(null);
     navigate(login);
   };
