@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./Header.module.css";
-import { login, registration } from "../../routes";
+import { PUBLIC_ROUTES } from "../../routes";
 import { logout } from "../../redux/actions/actions";
 
 export const Header = () => {
@@ -15,7 +15,7 @@ export const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
     setUser(null);
-    navigate(login);
+    navigate(PUBLIC_ROUTES.login);
   };
 
   useEffect(() => {
@@ -31,10 +31,10 @@ export const Header = () => {
         </button>
       ) : (
         <div className={styles.nav}>
-          <Link to={registration}>
+          <Link to={PUBLIC_ROUTES.registration}>
             <button className={styles.button}>Sign Up</button>
           </Link>
-          <Link to={login}>
+          <Link to={PUBLIC_ROUTES.login}>
             <button className={styles.button}>Login</button>
           </Link>
         </div>
