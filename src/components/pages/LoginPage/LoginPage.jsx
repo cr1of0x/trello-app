@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { signin } from "../../../redux/thunks/auth";
+import { PUBLIC_ROUTES } from "../../../routes";
 import { LoginForm } from "../../forms/LoginForm/LoginForm";
-import { signin } from "../../redux/thunks/auth";
-import { PUBLIC_ROUTES, registration } from "../../routes";
 import styles from "./LoginPage.module.css";
 
 export const LoginPage = () => {

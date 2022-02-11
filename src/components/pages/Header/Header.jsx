@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./Header.module.css";
-import { PUBLIC_ROUTES } from "../../routes";
-import { logout } from "../../redux/actions/actions";
+import { PUBLIC_ROUTES } from "../../../routes";
+import { logout } from "../../../redux/actions/actions";
 
 export const Header = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")));

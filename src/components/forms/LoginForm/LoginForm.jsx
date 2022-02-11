@@ -1,22 +1,20 @@
-import styles from "./RegisterForm.module.css";
-import { GoogleLogin } from "react-google-login";
+import { useState } from "react";
+import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { gmailLogin } from "../../../redux/thunks/auth";
 import { Input } from "../../сomponents/Input/Input";
-import { gmail } from "../../redux/thunks/auth";
+import styles from "./LoginForm.module.css";
 
 const initialState = {
-  login: "",
   email: "",
   password: "",
-  confirmPassword: "",
-  type: "email",
 };
 
-const RegisterForm = ({ handleSubmit }) => {
+export const LoginForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState(initialState);
 
@@ -25,18 +23,15 @@ const RegisterForm = ({ handleSubmit }) => {
   };
 
   const googleSucess = async (res) => {
-    const data = {
-      login: res?.profileObj.name,
-      email: res?.profileObj.email,
-      type: "google",
-    };
+    const result = res?.profileObj;
 
     try {
-      dispatch(gmail(data, navigate, setErrors));
+      dispatch(gmailLogin(result, navigate, setErrors));
     } catch (error) {
       console.log(error);
     }
   };
+
   const googleFailure = (error) => {
     console.log(error);
     console.log("Google Sign In was unsucessfull. Try Again Later");
@@ -44,36 +39,21 @@ const RegisterForm = ({ handleSubmit }) => {
 
   return (
     <form
-      className={styles.registerform}
+      className={styles.loginform}
       onSubmit={(e) => {
         handleSubmit(e, formData, setErrors);
       }}
     >
-      <h2 className={styles.title}>Sign Up to Trello</h2>
+      <h2 className={styles.title}>Sign In</h2>
 
       <GoogleLogin
+        className={styles.google}
         clientId={process.env.REACT_APP_GOOGLE_ID}
         buttonText=""
-        className={styles.google}
+        on
         onSuccess={googleSucess}
         onFailure={googleFailure}
         cookiePolicy="single_host_origin"
-      />
-
-      <Input
-        className={styles.input}
-        name="login"
-        type="login"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-        wrapperClass={styles.inputgroup}
-        highlightClass={styles.highlight}
-        barClass={styles.bar}
-        labelClass={styles.label}
-        labelValue="Login"
-        errorClass={styles.error}
-        errorValue={errors.login}
       />
 
       <Input
@@ -107,25 +87,7 @@ const RegisterForm = ({ handleSubmit }) => {
         errorValue={errors.password}
       />
 
-      <Input
-        className={styles.input}
-        name="confirmPassword"
-        type="password"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-        wrapperClass={styles.inputgroup}
-        highlightClass={styles.highlight}
-        barClass={styles.bar}
-        labelClass={styles.label}
-        labelValue="Confirm Password"
-        errorClass={styles.error}
-        errorValue={errors.confirmPassword}
-      />
-
-      <input className={styles.submit} type="submit" value="SignUp" />
+      <input className={styles.submit} type="submit" value="Sign In" />
     </form>
   );
 };
-
-export default RegisterForm;

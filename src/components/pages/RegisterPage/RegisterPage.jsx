@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { signup } from "../../../redux/thunks/auth";
 import RegisterForm from "../../forms/RegisterForm/RegisterForm";
-import { signup } from "../../redux/thunks/auth";
 import styles from "./RegisterPage.module.css";
 
 export const RegisterPage = () => {
