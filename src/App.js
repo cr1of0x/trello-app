@@ -15,6 +15,7 @@ import { Loader } from "./components/сomponents/Loader/Loader";
 import { PublicRoute } from "./components/сomponents/PublicRoute/PublicRoute";
 
 export const App = () => {
+  console.log(localStorage.getItem("token"));
   return (
     <Provider store={store}>
       <Router>
