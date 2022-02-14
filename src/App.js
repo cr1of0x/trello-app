@@ -7,7 +7,7 @@ import { Header } from "./components/pages/Header/Header";
 import { Dashboard } from "./components/pages/Dashboard/Dashboard";
 import { RegisterPage } from "./components/pages/RegisterPage/RegisterPage";
 import { LoginPage } from "./components/pages/LoginPage/LoginPage";
-import HomePage from "./components/pages/HomePage/HomePage";
+import { HomePage } from "./components/pages/HomePage/HomePage";
 
 import { ConfirmEmail } from "./components/pages/ConfirmEmail/ConfirmEmail";
 import { PrivateRoute } from "./components/сomponents/PrivateRoute/PrivateRoute";

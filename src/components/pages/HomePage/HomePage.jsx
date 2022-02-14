@@ -1,5 +1,5 @@
-const HomePage = () => {
-  return <div>Homepage</div>;
-};
+import { DashboardForm } from "../../forms/DashboardForm/DashboardForm";
 
-export default HomePage;
+export const HomePage = () => {
+  return <DashboardForm />;
+};

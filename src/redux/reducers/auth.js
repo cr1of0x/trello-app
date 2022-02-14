@@ -9,7 +9,7 @@ import {
 const authReducer = (state = { authData: null, loading: false }, action) => {
   switch (action.type) {
     case AUTH:
-      localStorage.setItem("token", JSON.stringify({ ...action?.data.token }));
+      localStorage.setItem("token", action.data);
       return { ...state, authData: action?.data };
     case LOGOUT:
       localStorage.removeItem("token");
