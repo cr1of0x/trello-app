@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.dashboard {
+  display: flex;
+  flex-flow: column;
+  border: 1px solid black;
+  width: 200px;
+  margin-left: 10px;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq4WyGuiSotqTQ_0H_mJPMoivB4iCnKPDMxA&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: 200px auto;
+}
+
+.title {
+  margin: 10px 0 20px 5px;
+  color: white;
+}
+
+.description {
+  color: white;
+  margin: 10px 0 20px 5px;
+}
+
+.dashboard:first-child {
+  margin-left: 0;
+}
+
+.newdashboard {
+  border: 1px solid black;
+  width: 150px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.newdashboard:hover {
+}

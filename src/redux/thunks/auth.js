@@ -22,11 +22,9 @@ export const signin = (formData, navigate, setErrors) => async (dispatch) => {
     dispatch(showLoader());
     const { data } = await api.signIn(formData);
 
-    console.log(data);
-
     await dispatch(auth(data));
     dispatch(hideLoader());
-    navigate(PRIVATE_ROUTES.dashboard);
+    navigate(PRIVATE_ROUTES.homepage);
   } catch (error) {
     errorsValidation(error, setErrors);
     dispatch(hideLoader());
@@ -54,7 +52,7 @@ export const gmailLogin =
       const { data } = await api.gmailLogin(gmailData);
 
       await dispatch(auth(data));
-      navigate(PRIVATE_ROUTES.dashboard);
+      navigate(PRIVATE_ROUTES.homepage);
       dispatch(hideLoader());
     } catch (error) {
       errorsValidation(error, setErrors);

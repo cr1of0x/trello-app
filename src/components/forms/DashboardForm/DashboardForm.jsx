@@ -1,46 +1,51 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createDashboard } from "../../../redux/thunks/dashboard";
+import { Input } from "../../сomponents/Input/Input";
+import styles from "./DashboardForm.module.css";
 
 const initialState = {
   title: "",
   description: "",
-  token: localStorage.getItem("token"),
 };
 
-export const DashboardForm = () => {
-  const dispatch = useDispatch();
+export const DashboardForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    dispatch(createDashboard(formData));
-  };
-
   return (
     <form
+      className={styles.dashboardform}
       onSubmit={(e) => {
-        handleSubmit(e);
+        handleSubmit(e, formData);
       }}
     >
-      <input
+      <Input
+        className={styles.input}
         name="title"
         onChange={(e) => {
           handleChange(e);
         }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Title"
       />
-      <input
+      <Input
+        className={styles.input}
         name="description"
         onChange={(e) => {
           handleChange(e);
         }}
+        wrapperClass={styles.inputgroup}
+        highlightClass={styles.highlight}
+        barClass={styles.bar}
+        labelClass={styles.label}
+        labelValue="Description"
       />
-      <input type="submit"></input>
+      <input className={styles.submit} type="submit" value="Create Dashboard" />
     </form>
   );
 };

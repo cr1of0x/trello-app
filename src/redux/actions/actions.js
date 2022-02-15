@@ -9,7 +9,7 @@ import {
 export const auth = (data) => {
   return {
     type: AUTH,
-    data: data,
+    data,
   };
 };
 

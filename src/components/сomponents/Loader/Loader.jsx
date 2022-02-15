@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import "./Loader.css";
 
 export const Loader = () => {
-  const loading = useSelector((state) => state.auth.loading);
+  const loading = useSelector((state) => state.preloader.loading);
 
   if (!loading) return null;
   return (

@@ -11,6 +11,12 @@ export const gmailLogin = (gmailData) =>
 export const dashboardCreate = (formData) =>
   API.post("/dashboard/createdashboard", formData, {
     headers: {
-      Authorization: token,
+      Authorization: "Bearer " + token,
+    },
+  });
+export const getDashboards = () =>
+  API.get("/dashboard/getdashboards", {
+    headers: {
+      Authorization: "Bearer " + token,
     },
   });
