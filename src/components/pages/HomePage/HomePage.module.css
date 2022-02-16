@@ -19,11 +19,6 @@
   color: white;
 }
 
-.description {
-  color: white;
-  margin: 10px 0 20px 5px;
-}
-
 .dashboard:first-child {
   margin-left: 0;
 }

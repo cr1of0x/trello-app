@@ -1,14 +1,7 @@
-export const Dashboard = ({
-  title,
-  description,
-  className,
-  titleClassName,
-  descriptionClassName,
-}) => {
+export const Dashboard = ({ title, className, titleClassName }) => {
   return (
     <div className={className}>
       <div className={titleClassName}>{title}</div>
-      <div className={descriptionClassName}>{description}</div>
     </div>
   );
 };

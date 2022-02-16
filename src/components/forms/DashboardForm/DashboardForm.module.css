@@ -133,3 +133,9 @@
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.error {
+  height: 7px;
+  color: red;
+  font-size: 10px;
+}

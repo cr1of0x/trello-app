@@ -9,6 +9,7 @@ const initialState = {
 
 export const DashboardForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState(initialState);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,7 +19,7 @@ export const DashboardForm = ({ handleSubmit }) => {
     <form
       className={styles.dashboardform}
       onSubmit={(e) => {
-        handleSubmit(e, formData);
+        handleSubmit(e, formData, setErrors);
       }}
     >
       <Input
@@ -32,6 +33,8 @@ export const DashboardForm = ({ handleSubmit }) => {
         barClass={styles.bar}
         labelClass={styles.label}
         labelValue="Title"
+        errorClass={styles.error}
+        errorValue={errors.title}
       />
       <Input
         className={styles.input}
