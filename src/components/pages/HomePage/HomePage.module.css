@@ -1,14 +1,15 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 
 .dashboard {
   display: flex;
-  flex-flow: column;
   border: 1px solid black;
   width: 200px;
   margin-left: 10px;
+  margin-top: 10px;
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq4WyGuiSotqTQ_0H_mJPMoivB4iCnKPDMxA&usqp=CAU);
   background-repeat: no-repeat;
   background-size: 200px auto;
@@ -19,16 +20,16 @@
   color: white;
 }
 
-.dashboard:first-child {
-  margin-left: 0;
-}
-
 .newdashboard {
   border: 1px solid black;
   width: 150px;
   margin-left: 10px;
+  margin-top: 10px;
+  transition: all 0.2s;
   cursor: pointer;
+  padding: 10px;
 }
 
 .newdashboard:hover {
+  transform: scale(105%);
 }

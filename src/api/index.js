@@ -27,3 +27,9 @@ export const getDashboards = () =>
       Authorization: "Bearer " + token,
     },
   });
+export const deleteDashboard = (id) =>
+  API.post("/dashboard/deletedashboard", id, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });

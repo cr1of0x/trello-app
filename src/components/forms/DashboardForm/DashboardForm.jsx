@@ -20,6 +20,8 @@ export const DashboardForm = ({ handleSubmit }) => {
       className={styles.dashboardform}
       onSubmit={(e) => {
         handleSubmit(e, formData, setErrors);
+        setErrors(initialState);
+        e.target.reset();
       }}
     >
       <Input
