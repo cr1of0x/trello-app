@@ -1,6 +1,8 @@
 import axios from "axios";
 import {
   DASHBOARD_CREATE_URL,
+  DASHBOARD_DELETE_URL,
+  DASHBOARD_EDIT_URL,
   DASHBOARD_GET_URL,
   GMAIL_LOGIN_URL,
   GMAIL_URL,
@@ -28,7 +30,14 @@ export const getDashboards = () =>
     },
   });
 export const deleteDashboard = (id) =>
-  API.post("/dashboard/deletedashboard", id, {
+  API.post(DASHBOARD_DELETE_URL, id, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const editDashboard = (id) =>
+  API.post(DASHBOARD_EDIT_URL, id, {
     headers: {
       Authorization: "Bearer " + token,
     },

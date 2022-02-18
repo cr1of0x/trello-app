@@ -1,6 +1,5 @@
 import {
   AUTH,
-  CREATE,
   EMAIL,
   HIDE_LOADER,
   LOGOUT,
@@ -28,8 +27,4 @@ export const hideLoader = () => {
 
 export const logout = () => {
   return { type: LOGOUT };
-};
-
-export const create = (data) => {
-  return { type: CREATE, data };
 };

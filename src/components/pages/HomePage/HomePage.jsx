@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteDashboard, getDashboards } from "../../../api";
+import { deleteDashboard, editDashboard, getDashboards } from "../../../api";
 import { createDashboard } from "../../../redux/thunks/dashboard";
 import { DashboardForm } from "../../forms/DashboardForm/DashboardForm";
 import { Dashboard } from "../../сomponents/Dashboard/Dashboard";
 import { Modal } from "../../сomponents/Modal/Modal";
 import styles from "./HomePage.module.css";
-import "react-toastify/dist/ReactToastify.css";
 import { hideLoader, showLoader } from "../../../redux/actions/actions";
 import { notify } from "../../../helpers/notify";
 import { DeleteDashboardForm } from "../../forms/DeleteDashboardForm/DeleteDashboardForm";
@@ -53,6 +52,10 @@ export const HomePage = () => {
     notify("Dashboard was deleted!");
   };
 
+  const titleEdit = async (id, title) => {
+    await editDashboard({ id, title });
+  };
+
   useEffect(() => {
     gettingDashboards();
   }, [token]);
@@ -70,10 +73,8 @@ export const HomePage = () => {
                 id={e._id}
                 title={e.title}
                 description={e.description}
-                className={styles.dashboard}
-                titleClassName={styles.title}
-                descriptionClassName={styles.description}
                 deleteClick={deleteModal}
+                handleEdit={titleEdit}
               />
             );
           })
