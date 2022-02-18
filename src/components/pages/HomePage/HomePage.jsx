@@ -10,10 +10,13 @@ import styles from "./HomePage.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { hideLoader, showLoader } from "../../../redux/actions/actions";
 import { notify } from "../../../helpers/notify";
+import { DeleteDashboardForm } from "../../forms/DeleteDashboardForm/DeleteDashboardForm";
 
 export const HomePage = () => {
   const [dashboards, setDashboards] = useState([]);
   const [modalActive, setModalActive] = useState(false);
+  const [deleteModalActive, setDeleteModalActive] = useState(false);
+  const [dashboardId, setDashboardId] = useState("");
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -38,13 +41,21 @@ export const HomePage = () => {
     dispatch(createDashboard(formData, setErrors, onSucess));
   };
 
+  const deleteModal = (id) => {
+    setDeleteModalActive(true);
+    setDashboardId(id);
+  };
+
   const deleteClick = async (id) => {
     await deleteDashboard({ id });
+    setDeleteModalActive(false);
+    gettingDashboards();
+    notify("Dashboard was deleted!");
   };
 
   useEffect(() => {
     gettingDashboards();
-  }, []);
+  }, [token]);
 
   return (
     <>
@@ -62,7 +73,7 @@ export const HomePage = () => {
                 className={styles.dashboard}
                 titleClassName={styles.title}
                 descriptionClassName={styles.description}
-                deleteClick={deleteClick}
+                deleteClick={deleteModal}
               />
             );
           })
@@ -78,6 +89,13 @@ export const HomePage = () => {
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
         <DashboardForm handleSubmit={handleSubmit} />
+      </Modal>
+      <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
+        <DeleteDashboardForm
+          setDeleteModalActive={setDeleteModalActive}
+          handleDelete={deleteClick}
+          id={dashboardId}
+        />
       </Modal>
     </>
   );
