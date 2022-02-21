@@ -1,5 +1,7 @@
 import {
   AUTH,
+  CREATE_DASHBOARD_TOAST,
+  DELETE_DASHBOARD_TOAST,
   EMAIL,
   HIDE_LOADER,
   LOGOUT,
@@ -27,4 +29,12 @@ export const hideLoader = () => {
 
 export const logout = () => {
   return { type: LOGOUT };
+};
+
+export const deleteDashboardToast = () => {
+  return { type: DELETE_DASHBOARD_TOAST };
+};
+
+export const createDashboardToast = () => {
+  return { type: CREATE_DASHBOARD_TOAST };
 };

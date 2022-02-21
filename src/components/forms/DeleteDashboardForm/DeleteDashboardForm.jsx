@@ -1,12 +1,20 @@
+import { useDispatch } from "react-redux";
+import { deleteDashboard } from "../../../redux/thunks/dashboard";
 import styles from "./DeleteDashboardForm.module.css";
 
 export const DeleteDashboardForm = ({
-  handleDelete,
   setDeleteModalActive,
   id,
+  setDashboards,
 }) => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
   const handleCancel = () => {
     setDeleteModalActive(false);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteDashboard(id, setDashboards, token, setDeleteModalActive));
   };
 
   return (
@@ -16,7 +24,7 @@ export const DeleteDashboardForm = ({
         <button
           className={styles.button}
           onClick={() => {
-            handleDelete(id);
+            handleDelete();
           }}
         >
           Delete

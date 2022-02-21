@@ -1,11 +1,24 @@
 import { useState } from "react";
 import styles from "./Dashboard.module.css";
 import { FaTrashAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { editDashboard } from "../../../redux/thunks/dashboard";
 
-export const Dashboard = ({ id, title, deleteClick, handleEdit }) => {
+export const Dashboard = ({ id, title, deleteClick }) => {
   const [titleName, setTitleName] = useState(title);
   const [titleToggle, setTitleToggle] = useState(false);
   const [deleteToggle, setDeleteToggle] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleBlur = () => {
+    if (titleName.length === 0) {
+      setTitleName(title);
+      setTitleToggle(false);
+    } else {
+      dispatch(editDashboard(id, titleName));
+      setTitleToggle(false);
+    }
+  };
 
   return (
     <div
@@ -25,8 +38,7 @@ export const Dashboard = ({ id, title, deleteClick, handleEdit }) => {
             setTitleName(e.target.value);
           }}
           onBlur={() => {
-            handleEdit(id, titleName);
-            setTitleToggle(false);
+            handleBlur();
           }}
           autoFocus={true}
           maxLength={12}

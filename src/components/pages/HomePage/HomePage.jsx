@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteDashboard, editDashboard, getDashboards } from "../../../api";
-import { createDashboard } from "../../../redux/thunks/dashboard";
+import {
+  createDashboard,
+  deleteDashboard,
+  gettingDashboards,
+} from "../../../redux/thunks/dashboard";
 import { DashboardForm } from "../../forms/DashboardForm/DashboardForm";
 import { Dashboard } from "../../сomponents/Dashboard/Dashboard";
 import { Modal } from "../../сomponents/Modal/Modal";
 import styles from "./HomePage.module.css";
-import { hideLoader, showLoader } from "../../../redux/actions/actions";
-import { notify } from "../../../helpers/notify";
 import { DeleteDashboardForm } from "../../forms/DeleteDashboardForm/DeleteDashboardForm";
 
 export const HomePage = () => {
@@ -19,25 +20,12 @@ export const HomePage = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
-  const gettingDashboards = async () => {
-    dispatch(showLoader());
-    const result = await getDashboards(token);
-    const listOfDashboards = result.data;
-    setDashboards(listOfDashboards);
-    dispatch(hideLoader());
-  };
-
-  const onSucess = () => {
-    setModalActive(false);
-    gettingDashboards();
-    dispatch(hideLoader());
-    notify("Dashboard created sucessfully!");
-  };
-
   const handleSubmit = (e, formData, setErrors) => {
     e.preventDefault();
 
-    dispatch(createDashboard(formData, setErrors, onSucess));
+    dispatch(
+      createDashboard(formData, setErrors, setModalActive, setDashboards, token)
+    );
   };
 
   const deleteModal = (id) => {
@@ -45,20 +33,9 @@ export const HomePage = () => {
     setDashboardId(id);
   };
 
-  const deleteClick = async (id) => {
-    await deleteDashboard({ id });
-    setDeleteModalActive(false);
-    gettingDashboards();
-    notify("Dashboard was deleted!");
-  };
-
-  const titleEdit = async (id, title) => {
-    await editDashboard({ id, title });
-  };
-
   useEffect(() => {
-    gettingDashboards();
-  }, [token]);
+    dispatch(gettingDashboards(token, setDashboards));
+  }, [token, dispatch]);
 
   return (
     <>
@@ -74,7 +51,6 @@ export const HomePage = () => {
                 title={e.title}
                 description={e.description}
                 deleteClick={deleteModal}
-                handleEdit={titleEdit}
               />
             );
           })
@@ -94,7 +70,7 @@ export const HomePage = () => {
       <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
         <DeleteDashboardForm
           setDeleteModalActive={setDeleteModalActive}
-          handleDelete={deleteClick}
+          setDashboards={setDashboards}
           id={dashboardId}
         />
       </Modal>
