@@ -4,7 +4,12 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { editDashboard } from "../../../redux/thunks/dashboard";
 
-export const Dashboard = ({ id, title, deleteClick }) => {
+export const Dashboard = ({
+  id,
+  title,
+  setDeleteModalActive,
+  setDashboardId,
+}) => {
   const [titleName, setTitleName] = useState(title);
   const [titleToggle, setTitleToggle] = useState(false);
   const [deleteToggle, setDeleteToggle] = useState(false);
@@ -18,6 +23,11 @@ export const Dashboard = ({ id, title, deleteClick }) => {
       dispatch(editDashboard(id, titleName));
       setTitleToggle(false);
     }
+  };
+
+  const setId = () => {
+    setDeleteModalActive(true);
+    setDashboardId(id);
   };
 
   return (
@@ -59,7 +69,7 @@ export const Dashboard = ({ id, title, deleteClick }) => {
           className={styles.deletebutton}
           color="white"
           onClick={() => {
-            deleteClick(id);
+            setId();
           }}
         />
       ) : (

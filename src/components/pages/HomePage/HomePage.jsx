@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createDashboard,
   deleteDashboard,
@@ -13,33 +13,23 @@ import styles from "./HomePage.module.css";
 import { DeleteDashboardForm } from "../../forms/DeleteDashboardForm/DeleteDashboardForm";
 
 export const HomePage = () => {
-  const [dashboards, setDashboards] = useState([]);
   const [modalActive, setModalActive] = useState(false);
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [dashboardId, setDashboardId] = useState("");
   const dispatch = useDispatch();
-  const token = localStorage.getItem("token");
+  const dashboards = useSelector((state) => state.dashboards.dashboards);
 
-  const handleSubmit = (e, formData, setErrors) => {
-    e.preventDefault();
-
-    dispatch(
-      createDashboard(formData, setErrors, setModalActive, setDashboards, token)
-    );
-  };
-
-  const deleteModal = (id) => {
-    setDeleteModalActive(true);
-    setDashboardId(id);
+  const handleSubmit = (formData) => {
+    dispatch(createDashboard(formData, setModalActive));
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteDashboard(id, setDashboards, token, setDeleteModalActive));
+    dispatch(deleteDashboard(id, setDeleteModalActive));
   };
 
   useEffect(() => {
-    dispatch(gettingDashboards(token, setDashboards));
-  }, [token, dispatch]);
+    dispatch(gettingDashboards());
+  }, []);
 
   return (
     <>
@@ -54,7 +44,8 @@ export const HomePage = () => {
                 id={e._id}
                 title={e.title}
                 description={e.description}
-                deleteClick={deleteModal}
+                setDeleteModalActive={setDeleteModalActive}
+                setDashboardId={setDashboardId}
               />
             );
           })
@@ -74,7 +65,6 @@ export const HomePage = () => {
       <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
         <DeleteDashboardForm
           setDeleteModalActive={setDeleteModalActive}
-          setDashboards={setDashboards}
           id={dashboardId}
           handleDelete={handleDelete}
         />

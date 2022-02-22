@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Input } from "../../сomponents/Input/Input";
 import styles from "./DashboardForm.module.css";
 
@@ -9,18 +10,23 @@ const initialState = {
 
 export const DashboardForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(initialState);
-  const [errors, setErrors] = useState(initialState);
-
+  const errors = useSelector((state) => state.errors.errors);
+  const formName = useSelector((state) => state.errors.formName);
+  console.log(formName);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    setFormData({ ...formData, formName: "dashboardForm" });
+  }, []);
 
   return (
     <form
       className={styles.dashboardform}
       onSubmit={(e) => {
-        handleSubmit(e, formData, setErrors);
-        setErrors(initialState);
+        e.preventDefault();
+        handleSubmit(formData);
         e.target.reset();
       }}
     >
@@ -36,7 +42,7 @@ export const DashboardForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Title"
         errorClass={styles.error}
-        errorValue={errors.title}
+        errorValue={formName === "dashboardForm" && errors.title}
       />
       <Input
         className={styles.input}

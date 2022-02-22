@@ -1,5 +1,5 @@
 import * as api from "../../api/index.js";
-import { errorsValidation } from "../../errorsValidation.js";
+import { reduxErrorsValidation } from "../../reduxErrorsValidation.js";
 import {
   hideLoader,
   showLoader,
@@ -7,45 +7,46 @@ import {
   deleteDashboardToast,
 } from "../actions/actions.js";
 
-export const gettingDashboards = (token, setDashboards) => async (dispatch) => {
+export const gettingDashboards = () => async (dispatch) => {
   try {
     dispatch(showLoader());
-    const result = await api.getDashboards(token);
-    const listOfDashboards = result.data;
-    await setDashboards(listOfDashboards);
+    const result = await api.getDashboards();
+    const data = result.data;
+    dispatch({ type: "SET_DASHBOARDS", data });
     dispatch(hideLoader());
   } catch (error) {
-    console.log(error);
     dispatch(hideLoader());
+    throw error;
   }
 };
 
 export const createDashboard =
-  (formData, setErrors, setModalActive, setDashboards, token) =>
-  async (dispatch) => {
+  (formData, setModalActive) => async (dispatch) => {
     try {
       dispatch(showLoader());
       await api.dashboardCreate(formData);
-      await dispatch(gettingDashboards(token, setDashboards));
+      console.log(formData);
+      await dispatch(gettingDashboards());
       dispatch(createDashboardToast());
+      dispatch({ type: "SET_ERRORS", data: "" });
       setModalActive(false);
     } catch (error) {
-      errorsValidation(error, setErrors);
+      reduxErrorsValidation(error, dispatch, formData);
       dispatch(hideLoader());
     }
   };
 
 export const deleteDashboard =
-  (id, setDashboards, token, setDeleteModalActive) => async (dispatch) => {
+  (id, setDeleteModalActive) => async (dispatch) => {
     try {
       dispatch(showLoader());
       await api.deleteDashboard({ id });
-      await dispatch(gettingDashboards(token, setDashboards));
+      await dispatch(gettingDashboards());
       dispatch(deleteDashboardToast());
       setDeleteModalActive(false);
     } catch (error) {
-      console.log(error);
       dispatch(hideLoader());
+      throw error;
     }
   };
 
