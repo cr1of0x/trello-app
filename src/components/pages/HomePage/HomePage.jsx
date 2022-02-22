@@ -33,6 +33,10 @@ export const HomePage = () => {
     setDashboardId(id);
   };
 
+  const handleDelete = (id) => {
+    dispatch(deleteDashboard(id, setDashboards, token, setDeleteModalActive));
+  };
+
   useEffect(() => {
     dispatch(gettingDashboards(token, setDashboards));
   }, [token, dispatch]);
@@ -72,6 +76,7 @@ export const HomePage = () => {
           setDeleteModalActive={setDeleteModalActive}
           setDashboards={setDashboards}
           id={dashboardId}
+          handleDelete={handleDelete}
         />
       </Modal>
     </>
