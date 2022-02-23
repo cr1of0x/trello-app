@@ -42,9 +42,9 @@ export const createDashboardToast = () => {
 };
 
 export const setFormErrors = (data, formName) => {
-  return { type: SET_FORM_ERRORS, data, formName };
+  return { type: SET_FORM_ERRORS, data: data, formName: formName };
 };
 
 export const setDashboards = (data) => {
-  return { type: SET_DASHBOARDS, data };
+  return { type: SET_DASHBOARDS, data: data };
 };

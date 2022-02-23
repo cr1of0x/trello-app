@@ -26,6 +26,7 @@ export const DashboardForm = ({ handleSubmit }) => {
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(formData);
+        setFormData({ ...formData, title: "", description: "" });
         e.target.reset();
       }}
     >

@@ -11,7 +11,7 @@ import {
 
 export const onSubmit = () => async (dispatch) => {
   try {
-    dispatch(setFormErrors(""));
+    dispatch(setFormErrors("", ""));
     dispatch(hideLoader());
   } catch (error) {
     dispatch(hideLoader());
@@ -38,8 +38,8 @@ export const createDashboard = (formData, onSucess) => async (dispatch) => {
     await api.dashboardCreate(formData);
     await dispatch(gettingDashboards());
     dispatch(createDashboardToast());
+    dispatch(onSubmit());
     onSucess();
-    onSubmit();
   } catch (error) {
     reduxErrorsValidation(error, dispatch, formData);
     dispatch(hideLoader());

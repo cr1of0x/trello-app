@@ -10,11 +10,10 @@ import { ConfirmEmail } from "./components/pages/ConfirmEmail/ConfirmEmail";
 import { PrivateRoute } from "./components/сomponents/PrivateRoute/PrivateRoute";
 import { Loader } from "./components/сomponents/Loader/Loader";
 import { PublicRoute } from "./components/сomponents/PublicRoute/PublicRoute";
-import { ToastContainer } from "react-toastify";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { withProvider } from "./hocs/withProvider";
+import { withNotification } from "./hocs/withNotification";
 
-export const App = () => {
+const App = () => {
   return (
     <Router>
       <Header />
@@ -38,17 +37,8 @@ export const App = () => {
         />
       </Routes>
       <Loader />
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </Router>
   );
 };
+
+export default withProvider(withNotification(App));
