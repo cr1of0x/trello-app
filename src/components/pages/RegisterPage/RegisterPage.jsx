@@ -8,10 +8,10 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e, formData, setErrors) => {
+  const handleSubmit = async (e, formData) => {
     e.preventDefault();
 
-    dispatch(signup(formData, navigate, setErrors));
+    dispatch(signup(formData, navigate));
   };
   return (
     <div className={styles.login}>

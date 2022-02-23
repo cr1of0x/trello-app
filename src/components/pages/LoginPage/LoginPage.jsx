@@ -9,10 +9,10 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e, formData, setErrors) => {
+  const handleSubmit = (e, formData) => {
     e.preventDefault();
 
-    dispatch(signin(formData, navigate, setErrors));
+    dispatch(signin(formData, navigate));
   };
 
   return (

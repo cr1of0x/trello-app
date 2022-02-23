@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.newdashboard {
+  border: 1px solid black;
+  width: 150px;
+  margin-left: 10px;
+  margin-top: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.newdashboard:hover {
+  transform: scale(105%);
+}

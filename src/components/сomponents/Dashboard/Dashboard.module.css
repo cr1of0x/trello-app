@@ -1,0 +1,43 @@
+.dashboard {
+  display: flex;
+  position: relative;
+  border: 1px solid black;
+  width: 200px;
+  margin-left: 10px;
+  margin-top: 10px;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq4WyGuiSotqTQ_0H_mJPMoivB4iCnKPDMxA&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: 200px auto;
+}
+
+.titleinput {
+  margin: 10px 0 20px 5px;
+  color: whitesmoke;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: normal;
+  max-width: 100px;
+}
+
+.title {
+  margin: 10px 0 20px 5px;
+  -webkit-appearance: none;
+  color: whitesmoke;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.deletebutton {
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.deletebutton:hover {
+  transform: scale(110%);
+}

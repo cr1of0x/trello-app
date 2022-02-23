@@ -1,15 +1,19 @@
 import {
   AUTH,
+  CREATE_DASHBOARD_TOAST,
+  DELETE_DASHBOARD_TOAST,
   EMAIL,
   HIDE_LOADER,
   LOGOUT,
+  SET_DASHBOARDS,
+  SET_FORM_ERRORS,
   SHOW_LOADER,
 } from "../constants/actionTypes";
 
 export const auth = (data) => {
   return {
     type: AUTH,
-    data: data,
+    data,
   };
 };
 
@@ -27,4 +31,20 @@ export const hideLoader = () => {
 
 export const logout = () => {
   return { type: LOGOUT };
+};
+
+export const deleteDashboardToast = () => {
+  return { type: DELETE_DASHBOARD_TOAST };
+};
+
+export const createDashboardToast = () => {
+  return { type: CREATE_DASHBOARD_TOAST };
+};
+
+export const setFormErrors = (data, formName) => {
+  return { type: SET_FORM_ERRORS, data: data, formName: formName };
+};
+
+export const setDashboards = (data) => {
+  return { type: SET_DASHBOARDS, data: data };
 };

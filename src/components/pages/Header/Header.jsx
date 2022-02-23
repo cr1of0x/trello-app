@@ -6,7 +6,7 @@ import { PUBLIC_ROUTES } from "../../../routes";
 import { logout } from "../../../redux/actions/actions";
 
 export const Header = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")));
+  const [user, setUser] = useState(localStorage.getItem("token"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("token")));
+    setUser(localStorage.getItem("token"));
   }, [location]);
 
   return (
