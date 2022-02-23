@@ -1,3 +1,5 @@
+import { setFormErrors } from "../redux/actions/actions";
+
 export const reduxErrorsValidation = (error, dispatch, formData) => {
   if (error.request.status === 400) {
     let errorsArray = error.response.data.error.details;
@@ -5,7 +7,7 @@ export const reduxErrorsValidation = (error, dispatch, formData) => {
       (obj, item) => ((obj[item.context.key] = item.message), obj),
       {}
     );
-    dispatch({ type: "SET_ERRORS", data: data, formName: formData.formName });
+    dispatch(setFormErrors(data, formData.formName));
   } else {
     return error;
   }

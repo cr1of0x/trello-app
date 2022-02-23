@@ -12,7 +12,6 @@ export const DashboardForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(initialState);
   const errors = useSelector((state) => state.errors.errors);
   const formName = useSelector((state) => state.errors.formName);
-  console.log(formName);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

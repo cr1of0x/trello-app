@@ -19,12 +19,17 @@ export const HomePage = () => {
   const dispatch = useDispatch();
   const dashboards = useSelector((state) => state.dashboards.dashboards);
 
+  const onSucess = () => {
+    setModalActive(false);
+    setDeleteModalActive(false);
+  };
+
   const handleSubmit = (formData) => {
-    dispatch(createDashboard(formData, setModalActive));
+    dispatch(createDashboard(formData, onSucess));
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteDashboard(id, setDeleteModalActive));
+    dispatch(deleteDashboard(id, onSucess));
   };
 
   useEffect(() => {

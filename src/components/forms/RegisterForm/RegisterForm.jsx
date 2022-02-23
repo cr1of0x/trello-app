@@ -1,8 +1,8 @@
 import styles from "./RegisterForm.module.css";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { gmail } from "../../../redux/thunks/auth";
 import { Input } from "../../сomponents/Input/Input";
 
@@ -17,8 +17,13 @@ const initialState = {
 const RegisterForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const errors = useSelector((state) => state.errors.errors);
+  const formName = useSelector((state) => state.errors.formName);
   const [formData, setFormData] = useState(initialState);
-  const [errors, setErrors] = useState(initialState);
+
+  useEffect(() => {
+    setFormData({ ...formData, formName: "registerForm" });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +37,7 @@ const RegisterForm = ({ handleSubmit }) => {
     };
 
     try {
-      dispatch(gmail(data, navigate, setErrors));
+      dispatch(gmail({ ...data, formName: "registerForm" }, navigate));
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +51,7 @@ const RegisterForm = ({ handleSubmit }) => {
     <form
       className={styles.registerform}
       onSubmit={(e) => {
-        handleSubmit(e, formData, setErrors);
+        handleSubmit(e, formData);
       }}
     >
       <h2 className={styles.title}>Sign Up to Trello</h2>
@@ -73,7 +78,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Login"
         errorClass={styles.error}
-        errorValue={errors.login}
+        errorValue={formName === "registerForm" && errors.login}
       />
 
       <Input
@@ -88,7 +93,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Email"
         errorClass={styles.error}
-        errorValue={errors.email}
+        errorValue={formName === "registerForm" && errors.email}
       />
 
       <Input
@@ -104,7 +109,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Password"
         errorClass={styles.error}
-        errorValue={errors.password}
+        errorValue={formName === "registerForm" && errors.password}
       />
 
       <Input
@@ -120,7 +125,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Confirm Password"
         errorClass={styles.error}
-        errorValue={errors.confirmPassword}
+        errorValue={formName === "registerForm" && errors.confirmPassword}
       />
 
       <input className={styles.submit} type="submit" value="SignUp" />

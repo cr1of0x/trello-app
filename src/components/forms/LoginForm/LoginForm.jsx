@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { gmailLogin } from "../../../redux/thunks/auth";
 import { Input } from "../../сomponents/Input/Input";
@@ -14,9 +14,14 @@ const initialState = {
 export const LoginForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const errors = useSelector((state) => state.errors.errors);
+  const formName = useSelector((state) => state.errors.formName);
 
   const [formData, setFormData] = useState(initialState);
-  const [errors, setErrors] = useState(initialState);
+
+  useEffect(() => {
+    setFormData({ ...formData, formName: "loginForm" });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,9 +31,9 @@ export const LoginForm = ({ handleSubmit }) => {
     const result = res?.profileObj;
 
     try {
-      dispatch(gmailLogin(result, navigate, setErrors));
+      dispatch(gmailLogin({ ...result, formName: "loginForm" }, navigate));
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -41,7 +46,7 @@ export const LoginForm = ({ handleSubmit }) => {
     <form
       className={styles.loginform}
       onSubmit={(e) => {
-        handleSubmit(e, formData, setErrors);
+        handleSubmit(e, formData);
       }}
     >
       <h2 className={styles.title}>Sign In</h2>
@@ -68,7 +73,7 @@ export const LoginForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Email"
         errorClass={styles.error}
-        errorValue={errors.email}
+        errorValue={formName === "loginForm" && errors.email}
       />
 
       <Input
@@ -84,7 +89,7 @@ export const LoginForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Password"
         errorClass={styles.error}
-        errorValue={errors.password}
+        errorValue={formName === "loginForm" && errors.password}
       />
 
       <input className={styles.submit} type="submit" value="Sign In" />

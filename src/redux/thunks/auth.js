@@ -1,9 +1,9 @@
 import * as api from "../../api/index.js";
-import { errorsValidation } from "../../errorsValidation.js";
+import { reduxErrorsValidation } from "../../helpers/reduxErrorsValidation.js";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../../routes.js";
 import { auth, email, hideLoader, showLoader } from "../actions/actions.js";
 
-export const signup = (formData, navigate, setErrors) => async (dispatch) => {
+export const signup = (formData, navigate) => async (dispatch) => {
   try {
     dispatch(showLoader());
     const { data } = await api.signUp(formData);
@@ -12,12 +12,12 @@ export const signup = (formData, navigate, setErrors) => async (dispatch) => {
     dispatch(hideLoader());
     navigate(PUBLIC_ROUTES.confirmemail);
   } catch (error) {
-    errorsValidation(error, setErrors);
+    reduxErrorsValidation(error, dispatch, formData);
     dispatch(hideLoader());
   }
 };
 
-export const signin = (formData, navigate, setErrors) => async (dispatch) => {
+export const signin = (formData, navigate) => async (dispatch) => {
   try {
     dispatch(showLoader());
     const { data } = await api.signIn(formData);
@@ -26,12 +26,12 @@ export const signin = (formData, navigate, setErrors) => async (dispatch) => {
     dispatch(hideLoader());
     navigate(PRIVATE_ROUTES.homepage);
   } catch (error) {
-    errorsValidation(error, setErrors);
+    reduxErrorsValidation(error, dispatch, formData);
     dispatch(hideLoader());
   }
 };
 
-export const gmail = (gmailData, navigate, setErrors) => async (dispatch) => {
+export const gmail = (gmailData, navigate) => async (dispatch) => {
   try {
     dispatch(showLoader());
     const { data } = await api.gmail(gmailData);
@@ -40,22 +40,21 @@ export const gmail = (gmailData, navigate, setErrors) => async (dispatch) => {
     navigate(PUBLIC_ROUTES.confirmemail);
     dispatch(hideLoader());
   } catch (error) {
-    errorsValidation(error, setErrors);
+    reduxErrorsValidation(error, dispatch, gmailData);
     dispatch(hideLoader());
   }
 };
 
-export const gmailLogin =
-  (gmailData, navigate, setErrors) => async (dispatch) => {
-    try {
-      dispatch(showLoader());
-      const { data } = await api.gmailLogin(gmailData);
+export const gmailLogin = (gmailData, navigate) => async (dispatch) => {
+  try {
+    dispatch(showLoader());
+    const { data } = await api.gmailLogin(gmailData);
 
-      await dispatch(auth(data));
-      navigate(PRIVATE_ROUTES.homepage);
-      dispatch(hideLoader());
-    } catch (error) {
-      errorsValidation(error, setErrors);
-      dispatch(hideLoader());
-    }
-  };
+    await dispatch(auth(data));
+    navigate(PRIVATE_ROUTES.homepage);
+    dispatch(hideLoader());
+  } catch (error) {
+    reduxErrorsValidation(error, dispatch, gmailData);
+    dispatch(hideLoader());
+  }
+};
