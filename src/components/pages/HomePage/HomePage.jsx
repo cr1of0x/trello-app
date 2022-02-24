@@ -18,6 +18,9 @@ export const HomePage = () => {
   const [dashboardId, setDashboardId] = useState("");
   const dispatch = useDispatch();
   const dashboards = useSelector((state) => state.dashboards.dashboards);
+  const favoriteDashboards = dashboards.filter((e) => {
+    return e.isFavorite === true;
+  });
 
   const onSucess = () => {
     setModalActive(false);
@@ -39,6 +42,25 @@ export const HomePage = () => {
   return (
     <>
       <div className={styles.container}>
+        {favoriteDashboards.length === 0 ? (
+          <div>No favorite dashboards</div>
+        ) : (
+          favoriteDashboards.map((e) => {
+            return (
+              <Dashboard
+                key={e._id}
+                id={e._id}
+                title={e.title}
+                isFavorite={e.isFavorite}
+                description={e.description}
+                setDeleteModalActive={setDeleteModalActive}
+                setDashboardId={setDashboardId}
+              />
+            );
+          })
+        )}
+      </div>
+      <div className={styles.container}>
         {dashboards.length === 0 ? (
           <div>Create your first dashboard!</div>
         ) : (
@@ -48,6 +70,7 @@ export const HomePage = () => {
                 key={e._id}
                 id={e._id}
                 title={e.title}
+                isFavorite={e.isFavorite}
                 description={e.description}
                 setDeleteModalActive={setDeleteModalActive}
                 setDashboardId={setDashboardId}

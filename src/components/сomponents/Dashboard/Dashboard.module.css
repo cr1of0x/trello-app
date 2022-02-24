@@ -32,12 +32,23 @@
 
 .deletebutton {
   font-size: 14px;
-  position: absolute;
-  top: 0;
-  right: 0;
   cursor: pointer;
 }
 
 .deletebutton:hover {
   transform: scale(110%);
+}
+
+.favoritebutton {
+  cursor: pointer;
+}
+
+.favoritebutton:hover {
+  transform: scale(110%);
+}
+
+.iconscontainer {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
