@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  ADD_FAVORITE_DASHBOARD,
   DASHBOARD_CREATE_URL,
   DASHBOARD_DELETE_URL,
   DASHBOARD_EDIT_URL,
@@ -38,6 +39,13 @@ export const deleteDashboard = (id) =>
 
 export const editDashboard = (id) =>
   API.post(DASHBOARD_EDIT_URL, id, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const favoriteDashboard = (data) =>
+  API.post(ADD_FAVORITE_DASHBOARD, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

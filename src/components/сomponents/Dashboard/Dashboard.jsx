@@ -1,14 +1,15 @@
 import { useState } from "react";
 import styles from "./Dashboard.module.css";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { editDashboard } from "../../../redux/thunks/dashboard";
+import { addFavorite, editDashboard } from "../../../redux/thunks/dashboard";
 
 export const Dashboard = ({
   id,
   title,
   setDeleteModalActive,
   setDashboardId,
+  isFavorite,
 }) => {
   const [titleName, setTitleName] = useState(title);
   const [titleToggle, setTitleToggle] = useState(false);
@@ -28,6 +29,14 @@ export const Dashboard = ({
   const setId = () => {
     setDeleteModalActive(true);
     setDashboardId(id);
+  };
+
+  const handleFavorite = (id) => {
+    if (!isFavorite) {
+      dispatch(addFavorite(id, true));
+    } else {
+      dispatch(addFavorite(id, false));
+    }
   };
 
   return (
@@ -64,17 +73,30 @@ export const Dashboard = ({
           {titleName}
         </p>
       )}
-      {deleteToggle ? (
-        <FaTrashAlt
-          className={styles.deletebutton}
-          color="white"
-          onClick={() => {
-            setId();
-          }}
-        />
-      ) : (
-        <span />
-      )}
+      <div className={styles.iconscontainer}>
+        {deleteToggle ? (
+          <FaTrashAlt
+            className={styles.deletebutton}
+            color="white"
+            onClick={() => {
+              setId();
+            }}
+          />
+        ) : (
+          <span />
+        )}
+        {deleteToggle || isFavorite ? (
+          <FaStar
+            onClick={() => {
+              handleFavorite(id);
+            }}
+            className={styles.favoritebutton}
+            color="white"
+          />
+        ) : (
+          <span />
+        )}
+      </div>
     </div>
   );
 };

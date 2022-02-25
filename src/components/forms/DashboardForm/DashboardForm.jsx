@@ -6,6 +6,7 @@ import styles from "./DashboardForm.module.css";
 const initialState = {
   title: "",
   description: "",
+  isFavorite: false,
 };
 
 export const DashboardForm = ({ handleSubmit }) => {

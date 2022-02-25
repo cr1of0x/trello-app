@@ -62,5 +62,16 @@ export const deleteDashboard = (id, onSucess) => async (dispatch) => {
 export const editDashboard = (id, title) => async (dispatch) => {
   try {
     await api.editDashboard({ id, title });
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addFavorite = (id, boolean) => async (dispatch) => {
+  try {
+    await api.favoriteDashboard({ id, boolean });
+    await dispatch(gettingDashboards());
+  } catch (error) {
+    throw error;
+  }
 };

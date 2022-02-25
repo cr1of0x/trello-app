@@ -6,3 +6,4 @@ export const DASHBOARD_CREATE_URL = "/dashboard/create-dashboard";
 export const DASHBOARD_GET_URL = "/dashboard/get-dashboards";
 export const DASHBOARD_DELETE_URL = "/dashboard/delete-dashboard";
 export const DASHBOARD_EDIT_URL = "/dashboard/edit-dashboard";
+export const ADD_FAVORITE_DASHBOARD = "/dashboard/add-to-favorite-dashboard";
