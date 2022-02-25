@@ -67,18 +67,9 @@ export const editDashboard = (id, title) => async (dispatch) => {
   }
 };
 
-export const addFavorite = (id) => async (dispatch) => {
+export const addFavorite = (id, boolean) => async (dispatch) => {
   try {
-    await api.favoriteDashboard(id);
-    await dispatch(gettingDashboards());
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const deleteFavorite = (id) => async (dispatch) => {
-  try {
-    await api.deleteFavoriteDashboard(id);
+    await api.favoriteDashboard({ id, boolean });
     await dispatch(gettingDashboards());
   } catch (error) {
     throw error;

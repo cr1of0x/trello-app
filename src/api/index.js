@@ -5,7 +5,6 @@ import {
   DASHBOARD_DELETE_URL,
   DASHBOARD_EDIT_URL,
   DASHBOARD_GET_URL,
-  DELETE_FAVORITE_DASHBOARD,
   GMAIL_LOGIN_URL,
   GMAIL_URL,
   SIGNIN_URL,
@@ -45,15 +44,8 @@ export const editDashboard = (id) =>
     },
   });
 
-export const favoriteDashboard = (id) =>
-  API.post(ADD_FAVORITE_DASHBOARD, id, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-
-export const deleteFavoriteDashboard = (id) =>
-  API.post(DELETE_FAVORITE_DASHBOARD, id, {
+export const favoriteDashboard = (data) =>
+  API.post(ADD_FAVORITE_DASHBOARD, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

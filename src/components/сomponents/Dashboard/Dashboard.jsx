@@ -2,11 +2,7 @@ import { useState } from "react";
 import styles from "./Dashboard.module.css";
 import { FaTrashAlt, FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import {
-  addFavorite,
-  deleteFavorite,
-  editDashboard,
-} from "../../../redux/thunks/dashboard";
+import { addFavorite, editDashboard } from "../../../redux/thunks/dashboard";
 
 export const Dashboard = ({
   id,
@@ -37,9 +33,9 @@ export const Dashboard = ({
 
   const handleFavorite = (id) => {
     if (!isFavorite) {
-      dispatch(addFavorite({ id }));
+      dispatch(addFavorite(id, true));
     } else {
-      dispatch(deleteFavorite({ id }));
+      dispatch(addFavorite(id, false));
     }
   };
 
