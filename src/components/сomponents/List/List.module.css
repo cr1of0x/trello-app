@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 15px;
+}

@@ -5,6 +5,7 @@ import preloader from "./preloader";
 import toast from "./toast";
 import dashboards from "./dashboards";
 import errors from "./form";
+import lists from "./lists";
 
 export default combineReducers({
   auth,
@@ -12,4 +13,5 @@ export default combineReducers({
   toast,
   dashboards,
   errors,
+  lists,
 });

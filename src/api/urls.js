@@ -7,3 +7,6 @@ export const DASHBOARD_GET_URL = "/dashboard/get-dashboards";
 export const DASHBOARD_DELETE_URL = "/dashboard/delete-dashboard";
 export const DASHBOARD_EDIT_URL = "/dashboard/edit-dashboard";
 export const ADD_FAVORITE_DASHBOARD = "/dashboard/add-to-favorite-dashboard";
+export const LIST_CREATE_URL = "/list/create-list";
+export const LIST_GET_URL = "/list/get-lists";
+export const LIST_DELETE_URL = "/list/delete-list";

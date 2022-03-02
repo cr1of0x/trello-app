@@ -12,6 +12,7 @@ import { Loader } from "./components/сomponents/Loader/Loader";
 import { PublicRoute } from "./components/сomponents/PublicRoute/PublicRoute";
 import { withProvider } from "./hocs/withProvider";
 import { withNotification } from "./hocs/withNotification";
+import { DashboardInner } from "./components/pages/DashboardInner/DashboardInner";
 
 const App = () => {
   return (
@@ -35,7 +36,9 @@ const App = () => {
           path={PUBLIC_ROUTES.confirmemail}
           element={<PublicRoute Component={ConfirmEmail} />}
         />
+        <Route exact path={`/b/:pathId`} element={<DashboardInner />} />
       </Routes>
+
       <Loader />
     </Router>
   );
