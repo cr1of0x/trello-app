@@ -65,8 +65,12 @@ export const Dashboard = ({
         />
       ) : (
         <p
-          onDoubleClick={() => {
+          onDoubleClick={(e) => {
+            e.preventDefault();
             setTitleToggle(true);
+          }}
+          onClick={(e) => {
+            e.preventDefault();
           }}
           className={styles.title}
         >

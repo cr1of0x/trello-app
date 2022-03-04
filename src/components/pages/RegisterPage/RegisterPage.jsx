@@ -14,7 +14,7 @@ export const RegisterPage = () => {
     dispatch(signup(formData, navigate));
   };
   return (
-    <div className={styles.login}>
+    <div className={styles.register}>
       <div className={styles.infoblock}>
         <h3 className={styles.info}>Already have account? You can Sign In</h3>
         <Link to="/login">

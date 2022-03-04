@@ -1,31 +1,19 @@
-import { useDispatch } from "react-redux";
-import { deleteList } from "../../../redux/thunks/list";
+import { Dropdown } from "../DropDown/DropDown";
 import styles from "./List.module.css";
 
-export const List = ({ title, dashboard_id, list_id }) => {
-  const dispatch = useDispatch();
-  const handleDelete = () => {
-    dispatch(deleteList(dashboard_id, list_id));
-  };
-
+export const List = ({ title, dashboard_id, list_id, handleDelete }) => {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div className={styles.container}>
-        <div>{title}</div>
-        <select
-          className={styles.select}
-          onChange={() => {
-            handleDelete();
+        <div className={styles.title}>{title}</div>
+        <Dropdown
+          onClick={() => {
+            handleDelete(dashboard_id, list_id);
           }}
-          defaultValue=""
-        >
-          <option value="" disabled hidden>
-            ...
-          </option>
-          <option value="Archive list">Archive list</option>
-        </select>
+          options={["Archive this list"]}
+        />
       </div>
-      <button>Add card</button>
+      <button className={styles.card}>+ Add a card</button>
     </div>
   );
 };

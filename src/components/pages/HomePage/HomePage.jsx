@@ -41,7 +41,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <h2>Favorite dashboards</h2>
       <div className={styles.container}>
         {favoriteDashboards.length === 0 ? (
@@ -49,7 +49,7 @@ export const HomePage = () => {
         ) : (
           favoriteDashboards.map((e) => {
             return (
-              <Link key={e._id} to={`/b/${e._id}`}>
+              <Link className={styles.link} key={e._id} to={`/b/${e._id}`}>
                 <Dashboard
                   key={e._id}
                   id={e._id}
@@ -71,7 +71,7 @@ export const HomePage = () => {
         ) : (
           dashboards.map((e) => {
             return (
-              <Link key={e._id} to={`/b/${e._id}`}>
+              <Link className={styles.link} key={e._id} to={`/b/${e._id}`}>
                 <Dashboard
                   key={e._id}
                   id={e._id}
@@ -104,6 +104,6 @@ export const HomePage = () => {
           handleDelete={handleDelete}
         />
       </Modal>
-    </>
+    </div>
   );
 };
