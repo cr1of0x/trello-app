@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { DASHBOARD_FORM } from "../../../helpers/formNames";
 import { Input } from "../../сomponents/Input/Input";
 import styles from "./DashboardForm.module.css";
 
@@ -18,7 +19,7 @@ export const DashboardForm = ({ handleSubmit }) => {
   };
 
   useEffect(() => {
-    setFormData({ ...formData, formName: "dashboardForm" });
+    setFormData({ ...formData, formName: DASHBOARD_FORM });
   }, []);
 
   return (
@@ -43,7 +44,7 @@ export const DashboardForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Title"
         errorClass={styles.error}
-        errorValue={formName === "dashboardForm" && errors.title}
+        errorValue={formName === DASHBOARD_FORM && errors.title}
       />
       <Input
         className={styles.input}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LOGIN_FORM } from "../../../helpers/formNames";
 import { gmailLogin } from "../../../redux/thunks/auth";
 import { Input } from "../../сomponents/Input/Input";
 import styles from "./LoginForm.module.css";
@@ -20,7 +21,7 @@ export const LoginForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(initialState);
 
   useEffect(() => {
-    setFormData({ ...formData, formName: "loginForm" });
+    setFormData({ ...formData, formName: LOGIN_FORM });
   }, []);
 
   const handleChange = (e) => {
@@ -31,7 +32,7 @@ export const LoginForm = ({ handleSubmit }) => {
     const result = res?.profileObj;
 
     try {
-      dispatch(gmailLogin({ ...result, formName: "loginForm" }, navigate));
+      dispatch(gmailLogin({ ...result, formName: LOGIN_FORM }, navigate));
     } catch (error) {
       throw error;
     }
@@ -73,7 +74,7 @@ export const LoginForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Email"
         errorClass={styles.error}
-        errorValue={formName === "loginForm" && errors.email}
+        errorValue={formName === LOGIN_FORM && errors.email}
       />
 
       <Input
@@ -89,7 +90,7 @@ export const LoginForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Password"
         errorClass={styles.error}
-        errorValue={formName === "loginForm" && errors.password}
+        errorValue={formName === LOGIN_FORM && errors.password}
       />
 
       <input className={styles.submit} type="submit" value="Sign In" />

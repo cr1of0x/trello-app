@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gmail } from "../../../redux/thunks/auth";
 import { Input } from "../../сomponents/Input/Input";
+import { REGISTER_FORM } from "../../../helpers/formNames";
 
 const initialState = {
   login: "",
@@ -22,7 +23,7 @@ const RegisterForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(initialState);
 
   useEffect(() => {
-    setFormData({ ...formData, formName: "registerForm" });
+    setFormData({ ...formData, formName: REGISTER_FORM });
   }, []);
 
   const handleChange = (e) => {
@@ -37,7 +38,7 @@ const RegisterForm = ({ handleSubmit }) => {
     };
 
     try {
-      dispatch(gmail({ ...data, formName: "registerForm" }, navigate));
+      dispatch(gmail({ ...data, formName: REGISTER_FORM }, navigate));
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +79,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Login"
         errorClass={styles.error}
-        errorValue={formName === "registerForm" && errors.login}
+        errorValue={formName === REGISTER_FORM && errors.login}
       />
 
       <Input
@@ -93,7 +94,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Email"
         errorClass={styles.error}
-        errorValue={formName === "registerForm" && errors.email}
+        errorValue={formName === REGISTER_FORM && errors.email}
       />
 
       <Input
@@ -109,7 +110,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Password"
         errorClass={styles.error}
-        errorValue={formName === "registerForm" && errors.password}
+        errorValue={formName === REGISTER_FORM && errors.password}
       />
 
       <Input
@@ -125,7 +126,7 @@ const RegisterForm = ({ handleSubmit }) => {
         labelClass={styles.label}
         labelValue="Confirm Password"
         errorClass={styles.error}
-        errorValue={formName === "registerForm" && errors.confirmPassword}
+        errorValue={formName === REGISTER_FORM && errors.confirmPassword}
       />
 
       <input className={styles.submit} type="submit" value="SignUp" />

@@ -12,6 +12,7 @@ import { Loader } from "./components/сomponents/Loader/Loader";
 import { PublicRoute } from "./components/сomponents/PublicRoute/PublicRoute";
 import { withProvider } from "./hocs/withProvider";
 import { withNotification } from "./hocs/withNotification";
+import { DashboardDetails } from "./components/pages/DashboardDetails/DashboardDetails";
 
 const App = () => {
   return (
@@ -35,7 +36,13 @@ const App = () => {
           path={PUBLIC_ROUTES.confirmemail}
           element={<PublicRoute Component={ConfirmEmail} />}
         />
+        <Route
+          exact
+          path={PRIVATE_ROUTES.dashboardDetails}
+          element={<DashboardDetails />}
+        />
       </Routes>
+
       <Loader />
     </Router>
   );

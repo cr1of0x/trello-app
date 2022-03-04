@@ -1,27 +1,31 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: black;
-    background-color: rgb(159, 123, 255);
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: black;
+  background-color: rgb(159, 123, 255);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .logo {
-    color: white;
+  color: white;
 }
 
 .button {
-    border: 1px solid whitesmoke;
-    width: 80px;
-    padding: 10px;
-    margin-right: 10px ;
-    border-radius: 10px;
-    background-color: rgb(159, 123, 255);
-    color: whitesmoke;
-    transition: 0.2s ease all;
-} 
+  border: 1px solid whitesmoke;
+  width: 80px;
+  padding: 10px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: rgb(159, 123, 255);
+  color: whitesmoke;
+  transition: 0.2s ease all;
+}
 
 .button:hover {
-    cursor: pointer;
-    transform: scale(1.1);
+  cursor: pointer;
+  transform: scale(1.1);
 }

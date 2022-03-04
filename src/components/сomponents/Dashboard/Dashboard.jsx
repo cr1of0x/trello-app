@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Dashboard.module.css";
-import { FaTrashAlt, FaStar } from "react-icons/fa";
+import { FaTrashAlt, FaStar, FaRegStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addFavorite, editDashboard } from "../../../redux/thunks/dashboard";
 
@@ -65,8 +65,12 @@ export const Dashboard = ({
         />
       ) : (
         <p
-          onDoubleClick={() => {
+          onDoubleClick={(e) => {
+            e.preventDefault();
             setTitleToggle(true);
+          }}
+          onClick={(e) => {
+            e.preventDefault();
           }}
           className={styles.title}
         >
@@ -78,7 +82,8 @@ export const Dashboard = ({
           <FaTrashAlt
             className={styles.deletebutton}
             color="white"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setId();
             }}
           />
@@ -86,13 +91,27 @@ export const Dashboard = ({
           <span />
         )}
         {deleteToggle || isFavorite ? (
-          <FaStar
-            onClick={() => {
-              handleFavorite(id);
-            }}
-            className={styles.favoritebutton}
-            color="white"
-          />
+          <>
+            {isFavorite ? (
+              <FaStar
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleFavorite(id);
+                }}
+                className={styles.favoritebutton}
+                color="white"
+              />
+            ) : (
+              <FaRegStar
+                color="white"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleFavorite(id);
+                }}
+                className={styles.favoritebutton}
+              />
+            )}
+          </>
         ) : (
           <span />
         )}

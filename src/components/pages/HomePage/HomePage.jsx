@@ -41,7 +41,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <h2>Favorite dashboards</h2>
       <div className={styles.container}>
         {favoriteDashboards.length === 0 ? (
@@ -49,15 +49,17 @@ export const HomePage = () => {
         ) : (
           favoriteDashboards.map((e) => {
             return (
-              <Dashboard
-                key={e._id}
-                id={e._id}
-                title={e.title}
-                isFavorite={e.isFavorite}
-                description={e.description}
-                setDeleteModalActive={setDeleteModalActive}
-                setDashboardId={setDashboardId}
-              />
+              <Link className={styles.link} key={e._id} to={`/b/${e._id}`}>
+                <Dashboard
+                  key={e._id}
+                  id={e._id}
+                  title={e.title}
+                  isFavorite={e.isFavorite}
+                  description={e.description}
+                  setDeleteModalActive={setDeleteModalActive}
+                  setDashboardId={setDashboardId}
+                />
+              </Link>
             );
           })
         )}
@@ -69,15 +71,17 @@ export const HomePage = () => {
         ) : (
           dashboards.map((e) => {
             return (
-              <Dashboard
-                key={e._id}
-                id={e._id}
-                title={e.title}
-                isFavorite={e.isFavorite}
-                description={e.description}
-                setDeleteModalActive={setDeleteModalActive}
-                setDashboardId={setDashboardId}
-              />
+              <Link className={styles.link} key={e._id} to={`/b/${e._id}`}>
+                <Dashboard
+                  key={e._id}
+                  id={e._id}
+                  title={e.title}
+                  isFavorite={e.isFavorite}
+                  description={e.description}
+                  setDeleteModalActive={setDeleteModalActive}
+                  setDashboardId={setDashboardId}
+                />
+              </Link>
             );
           })
         )}
@@ -100,6 +104,6 @@ export const HomePage = () => {
           handleDelete={handleDelete}
         />
       </Modal>
-    </>
+    </div>
   );
 };
