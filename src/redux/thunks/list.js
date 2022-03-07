@@ -40,3 +40,11 @@ export const deleteList = (dashboard_id, list_id) => async (dispatch) => {
     throw error;
   }
 };
+
+export const editList = (id, title) => async (dispatch) => {
+  try {
+    await api.editList({ id, title });
+  } catch (error) {
+    throw error;
+  }
+};
