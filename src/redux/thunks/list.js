@@ -1,7 +1,6 @@
 import * as api from "../../api/index.js";
 import { reduxErrorsValidation } from "../../helpers/reduxErrorsValidation.js";
-import { hideLoader, showLoader } from "../actions/actions.js";
-import { SET_LISTS } from "../constants/actionTypes.js";
+import { hideLoader, setLists, showLoader } from "../actions/actions.js";
 import { onSubmit } from "./dashboard.js";
 
 export const getLists = (id) => async (dispatch) => {
@@ -9,7 +8,7 @@ export const getLists = (id) => async (dispatch) => {
     dispatch(showLoader());
     const lists = await api.getLists(id);
     const data = lists.data;
-    await dispatch({ type: SET_LISTS, data });
+    await dispatch(setLists(data));
     dispatch(hideLoader());
   } catch (error) {
     dispatch(hideLoader());

@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   ADD_FAVORITE_DASHBOARD,
   CARD_CREATE_URL,
+  CARD_EDIT_URL,
+  CARD_GET_URL,
   DASHBOARD_CREATE_URL,
   DASHBOARD_DELETE_URL,
   DASHBOARD_EDIT_URL,
@@ -89,6 +91,13 @@ export const editList = (data) =>
 
 export const cardCreate = (formData) =>
   API.post(CARD_CREATE_URL, formData, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const editCard = (data) =>
+  API.post(CARD_EDIT_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

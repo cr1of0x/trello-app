@@ -19,12 +19,12 @@ export const DashboardDetails = () => {
     dispatch(createList(id, formData, onSucess));
   };
 
-  const handleDelete = (dashboard_id, list_id) => {
-    dispatch(deleteList(dashboard_id, list_id));
-  };
-
   const handleCancel = () => {
     dispatch(setFormErrors(""));
+  };
+
+  const handleDelete = (dashboard_id, list_id) => {
+    dispatch(deleteList(dashboard_id, list_id));
   };
 
   useEffect(() => {
@@ -42,6 +42,8 @@ export const DashboardDetails = () => {
               dashboard_id={id}
               list_id={e._id}
               handleDelete={handleDelete}
+              cards={e.cards}
+              handleCancel={handleCancel}
             />
           );
         })}

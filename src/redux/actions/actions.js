@@ -5,8 +5,10 @@ import {
   EMAIL,
   HIDE_LOADER,
   LOGOUT,
+  SET_CARDS,
   SET_DASHBOARDS,
   SET_FORM_ERRORS,
+  SET_LISTS,
   SHOW_LOADER,
 } from "../constants/actionTypes";
 
@@ -47,4 +49,12 @@ export const setFormErrors = (data, formName) => {
 
 export const setDashboards = (data) => {
   return { type: SET_DASHBOARDS, data: data };
+};
+
+export const setLists = (data) => {
+  return { type: SET_LISTS, data: data };
+};
+
+export const setCards = (data) => {
+  return { type: SET_CARDS, data: data };
 };

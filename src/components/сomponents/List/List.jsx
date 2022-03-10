@@ -2,13 +2,26 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createCard } from "../../../redux/thunks/card";
 import { editList } from "../../../redux/thunks/list";
+import { CardForm } from "../../forms/CardForm/CardForm";
+import { Card } from "../Card/Card";
 import { Dropdown } from "../DropDown/DropDown";
 import styles from "./List.module.css";
 
-export const List = ({ title, dashboard_id, list_id, handleDelete }) => {
+export const List = ({
+  title,
+  dashboard_id,
+  list_id,
+  handleDelete,
+  cards,
+  handleCancel,
+}) => {
   const [titleToggle, setTitleToggle] = useState(false);
   const [titleName, setTitleName] = useState(title);
   const dispatch = useDispatch();
+
+  const handleCreateCard = (title, onSucess) => {
+    dispatch(createCard(list_id, dashboard_id, title, onSucess));
+  };
 
   const handleBlur = () => {
     if (titleName.length === 0) {
@@ -19,6 +32,7 @@ export const List = ({ title, dashboard_id, list_id, handleDelete }) => {
       setTitleToggle(false);
     }
   };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -52,14 +66,15 @@ export const List = ({ title, dashboard_id, list_id, handleDelete }) => {
           options={["Archive this list"]}
         />
       </div>
-      <button
-        className={styles.card}
-        onClick={() => {
-          dispatch(createCard(list_id, "card"));
-        }}
-      >
-        + Add a card
-      </button>
+
+      <div className={styles.cardscontainer}>
+        {cards.map((e) => {
+          return (
+            <Card title={e.title} key={e._id} id={e._id} list_id={list_id} />
+          );
+        })}
+      </div>
+      <CardForm handleCancel={handleCancel} handleCreate={handleCreateCard} />
     </div>
   );
 };
