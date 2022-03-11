@@ -1,6 +1,9 @@
 import axios from "axios";
 import {
   ADD_FAVORITE_DASHBOARD,
+  CARD_CREATE_URL,
+  CARD_EDIT_URL,
+  CARD_GET_URL,
   DASHBOARD_CREATE_URL,
   DASHBOARD_DELETE_URL,
   DASHBOARD_EDIT_URL,
@@ -9,6 +12,7 @@ import {
   GMAIL_URL,
   LIST_CREATE_URL,
   LIST_DELETE_URL,
+  LIST_EDIT_URL,
   LIST_GET_URL,
   SIGNIN_URL,
   SIGNUP_URL,
@@ -28,6 +32,7 @@ export const dashboardCreate = (formData) =>
       Authorization: "Bearer " + token,
     },
   });
+
 export const getDashboards = () =>
   API.get(DASHBOARD_GET_URL, {
     headers: {
@@ -41,8 +46,8 @@ export const deleteDashboard = (id) =>
     },
   });
 
-export const editDashboard = (id) =>
-  API.post(DASHBOARD_EDIT_URL, id, {
+export const editDashboard = (data) =>
+  API.post(DASHBOARD_EDIT_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -72,6 +77,27 @@ export const getLists = (data) =>
 
 export const deleteList = (id) =>
   API.post(LIST_DELETE_URL, id, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const editList = (data) =>
+  API.post(LIST_EDIT_URL, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const cardCreate = (formData) =>
+  API.post(CARD_CREATE_URL, formData, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const editCard = (data) =>
+  API.post(CARD_EDIT_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

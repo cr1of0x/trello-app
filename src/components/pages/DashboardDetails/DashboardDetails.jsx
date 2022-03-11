@@ -19,12 +19,12 @@ export const DashboardDetails = () => {
     dispatch(createList(id, formData, onSucess));
   };
 
-  const handleDelete = (dashboard_id, list_id) => {
-    dispatch(deleteList(dashboard_id, list_id));
-  };
-
   const handleCancel = () => {
     dispatch(setFormErrors(""));
+  };
+
+  const handleDelete = (dashboard_id, list_id) => {
+    dispatch(deleteList(dashboard_id, list_id));
   };
 
   useEffect(() => {
@@ -34,14 +34,16 @@ export const DashboardDetails = () => {
   return (
     <>
       <div className={styles.container}>
-        {lists.map((e) => {
+        {lists.map((list) => {
           return (
             <List
-              key={e._id}
-              title={e.title}
+              key={list._id}
+              title={list.title}
               dashboard_id={id}
-              list_id={e._id}
+              list_id={list._id}
               handleDelete={handleDelete}
+              cards={list.cards}
+              handleCancel={handleCancel}
             />
           );
         })}
