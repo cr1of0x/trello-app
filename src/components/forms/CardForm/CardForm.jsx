@@ -43,6 +43,7 @@ export const CardForm = ({ handleCreate, handleCancel }) => {
             onChange={(e) => {
               handleChange(e);
             }}
+            placeholder="Enter a card name..."
           />
           <div className={styles.error}>
             {formName === CARD_FORM && errors.title}

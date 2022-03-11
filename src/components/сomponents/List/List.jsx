@@ -69,9 +69,7 @@ export const List = ({
 
       <div className={styles.cardscontainer}>
         {cards.map((e) => {
-          return (
-            <Card title={e.title} key={e._id} id={e._id} list_id={list_id} />
-          );
+          return <Card title={e.title} key={e._id} id={e._id} />;
         })}
       </div>
       <CardForm handleCancel={handleCancel} handleCreate={handleCreateCard} />

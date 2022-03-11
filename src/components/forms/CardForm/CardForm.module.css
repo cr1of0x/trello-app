@@ -4,7 +4,7 @@
   cursor: pointer;
   border-radius: 5px;
   border: none;
-  background-color: whitesmoke;
+  background-color: rgb(235, 236, 240);
   text-align: start;
   padding: 7px;
   color: gray;
@@ -45,7 +45,7 @@
   text-align: start;
   padding: 10px;
   cursor: pointer;
-  background-color: rgb(245, 243, 243);
+  background-color: rgb(235, 236, 240);
   border-radius: 5px;
   border: 1px solid rgb(219, 218, 218);
 }
@@ -79,6 +79,7 @@
   border: none;
   border-radius: 5px;
   padding: 5px;
+  margin-left: 8px;
   color: white;
   cursor: pointer;
 }

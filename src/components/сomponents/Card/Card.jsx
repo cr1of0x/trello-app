@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editCard } from "../../../redux/thunks/card";
 
-export const Card = ({ title, id, list_id }) => {
+export const Card = ({ title, id }) => {
   const [iconToggle, setIconToggle] = useState(false);
   const [editToggle, setEditToggle] = useState(false);
   const [titleName, setTitleName] = useState(title);

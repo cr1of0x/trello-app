@@ -34,15 +34,15 @@ export const DashboardDetails = () => {
   return (
     <>
       <div className={styles.container}>
-        {lists.map((e) => {
+        {lists.map((list) => {
           return (
             <List
-              key={e._id}
-              title={e.title}
+              key={list._id}
+              title={list.title}
               dashboard_id={id}
-              list_id={e._id}
+              list_id={list._id}
               handleDelete={handleDelete}
-              cards={e.cards}
+              cards={list.cards}
               handleCancel={handleCancel}
             />
           );
