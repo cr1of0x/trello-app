@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createCard } from "../../../redux/thunks/card";
+import { createCard, deleteAllCards } from "../../../redux/thunks/card";
 import { editList } from "../../../redux/thunks/list";
 import { CardForm } from "../../forms/CardForm/CardForm";
 import { Card } from "../Card/Card";
@@ -21,6 +21,14 @@ export const List = ({
 
   const handleCreateCard = (title, onSucess) => {
     dispatch(createCard(list_id, dashboard_id, title, onSucess));
+  };
+
+  const archiveList = () => {
+    handleDelete(dashboard_id, list_id);
+  };
+
+  const archiveAllCards = () => {
+    dispatch(deleteAllCards(list_id, dashboard_id));
   };
 
   const handleBlur = () => {
@@ -60,10 +68,13 @@ export const List = ({
           </div>
         )}
         <Dropdown
-          onClick={() => {
-            handleDelete(dashboard_id, list_id);
-          }}
-          options={["Archive this list"]}
+          archiveList={archiveList}
+          archiveAllCards={archiveAllCards}
+          options={[
+            "Archive this list",
+            "Move all cards in this list",
+            "Archive all cards",
+          ]}
         />
       </div>
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./DropDown.module.css";
 
-export const Dropdown = ({ onClick, options }) => {
+export const Dropdown = ({ archiveList, options, archiveAllCards }) => {
   const [isActive, setIsActive] = useState(false);
   document.addEventListener("click", (e) => {
     setIsActive(false);
@@ -22,8 +22,13 @@ export const Dropdown = ({ onClick, options }) => {
             <div
               key={option}
               onClick={(e) => {
-                onClick();
-                setIsActive(false);
+                if (option === "Archive this list") {
+                  archiveList();
+                  setIsActive(false);
+                } else if (option === "Archive all cards") {
+                  archiveAllCards();
+                  setIsActive(false);
+                }
               }}
               className={styles.contentitem}
             >

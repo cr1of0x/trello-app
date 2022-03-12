@@ -20,3 +20,20 @@ export const editCard = (id, title) => async (dispatch) => {
     throw error;
   }
 };
+
+export const deleteAllCards = (list_id, dashboard_id) => async (dispatch) => {
+  try {
+    await api.deleteAllCards({ list_id });
+    await dispatch(getLists(dashboard_id));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const moveAllCards = (data) => async (dispatch) => {
+  try {
+    await api.moveAllCards({ data });
+  } catch (error) {
+    throw error;
+  }
+};
