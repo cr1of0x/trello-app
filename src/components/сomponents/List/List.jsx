@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createCard, deleteAllCards } from "../../../redux/thunks/card";
+import {
+  createCard,
+  deleteAllCards,
+  moveAllCards,
+} from "../../../redux/thunks/card";
 import { editList } from "../../../redux/thunks/list";
 import { CardForm } from "../../forms/CardForm/CardForm";
 import { Card } from "../Card/Card";
 import { Dropdown } from "../DropDown/DropDown";
+import { Modal } from "../Modal/Modal";
+import { MoveCards } from "../MoveCards/MoveCards";
 import styles from "./List.module.css";
 
 export const List = ({
@@ -14,9 +20,11 @@ export const List = ({
   handleDelete,
   cards,
   handleCancel,
+  lists,
 }) => {
   const [titleToggle, setTitleToggle] = useState(false);
   const [titleName, setTitleName] = useState(title);
+  const [moveCards, setMoveCards] = useState(false);
   const dispatch = useDispatch();
 
   const handleCreateCard = (title, onSucess) => {
@@ -29,6 +37,10 @@ export const List = ({
 
   const archiveAllCards = () => {
     dispatch(deleteAllCards(list_id, dashboard_id));
+  };
+
+  const moveAllCardsToList = (list_to_id) => {
+    dispatch(moveAllCards(list_id, list_to_id, cards, dashboard_id));
   };
 
   const handleBlur = () => {
@@ -68,15 +80,26 @@ export const List = ({
           </div>
         )}
         <Dropdown
-          archiveList={archiveList}
-          archiveAllCards={archiveAllCards}
           options={[
-            "Archive this list",
-            "Move all cards in this list",
-            "Archive all cards",
+            { title: "Archive this list", onClick: archiveList },
+            {
+              title: "Move all cards in this list",
+              onClick: () => {
+                setMoveCards(true);
+              },
+            },
+            { title: "Archive all cards", onClick: archiveAllCards },
           ]}
         />
       </div>
+      <Modal active={moveCards} setActive={setMoveCards}>
+        <MoveCards
+          lists={lists}
+          handleMove={moveAllCardsToList}
+          list_id={list_id}
+          setMoveCards={setMoveCards}
+        />
+      </Modal>
 
       <div className={styles.cardscontainer}>
         {cards.map((e) => {

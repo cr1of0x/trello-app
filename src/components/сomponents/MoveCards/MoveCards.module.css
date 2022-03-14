@@ -1,0 +1,23 @@
+.content {
+}
+
+.current {
+  margin: 10px 0 10px 0;
+  padding: 7px;
+  color: gray;
+  font-size: 20px;
+}
+.contentitem {
+  margin: 10px 0 10px 0;
+  padding: 7px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.contentitem:hover {
+  background-color: rgba(241, 241, 241, 0.938);
+}
+
+.contentitem:active {
+  background-color: rgba(214, 228, 227, 0.938);
+}

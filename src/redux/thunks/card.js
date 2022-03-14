@@ -30,10 +30,12 @@ export const deleteAllCards = (list_id, dashboard_id) => async (dispatch) => {
   }
 };
 
-export const moveAllCards = (data) => async (dispatch) => {
-  try {
-    await api.moveAllCards({ data });
-  } catch (error) {
-    throw error;
-  }
-};
+export const moveAllCards =
+  (list_from_id, list_to_id, cards, dashboard_id) => async (dispatch) => {
+    try {
+      await api.moveAllCards({ list_to_id, list_from_id, cards });
+      await dispatch(getLists(dashboard_id));
+    } catch (error) {
+      throw error;
+    }
+  };

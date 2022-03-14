@@ -44,6 +44,7 @@ export const DashboardDetails = () => {
               handleDelete={handleDelete}
               cards={list.cards}
               handleCancel={handleCancel}
+              lists={lists}
             />
           );
         })}
