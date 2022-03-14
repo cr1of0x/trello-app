@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-flow: column;
+}
+
+.error {
+  margin: 5px 0;
+  height: 10px;
+  color: red;
+  font-size: 10px;
+}
+
+.title {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.button {
+  background-color: rgb(159, 123, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  margin: auto;
+}

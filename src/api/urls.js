@@ -11,6 +11,7 @@ export const LIST_CREATE_URL = "/list/create-list";
 export const LIST_GET_URL = "/list/get-lists";
 export const LIST_DELETE_URL = "/list/delete-list";
 export const LIST_EDIT_URL = "/list/edit-list";
+export const LIST_COPY_URL = "/list/copy-list";
 export const CARD_CREATE_URL = "/card/create-card";
 export const CARD_EDIT_URL = "/card/edit-card";
 export const CARD_DELETE_ALL = "/card/delete-all-cards";

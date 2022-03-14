@@ -11,6 +11,7 @@ import {
   DASHBOARD_GET_URL,
   GMAIL_LOGIN_URL,
   GMAIL_URL,
+  LIST_COPY_URL,
   LIST_CREATE_URL,
   LIST_DELETE_URL,
   LIST_EDIT_URL,
@@ -113,6 +114,13 @@ export const deleteAllCards = (id) =>
 
 export const moveAllCards = (data) =>
   API.post(CARD_MOVE_ALL, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const copyList = (data) =>
+  API.post(LIST_COPY_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

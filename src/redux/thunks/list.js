@@ -47,3 +47,16 @@ export const editList = (id, title) => async (dispatch) => {
     throw error;
   }
 };
+
+export const copyOneList =
+  (formData, cards, dashboard_id, onSucess) => async (dispatch) => {
+    try {
+      dispatch(showLoader());
+      await api.copyList({ formData, cards, dashboard_id });
+      await dispatch(getLists(dashboard_id));
+      onSucess();
+    } catch (error) {
+      reduxErrorsValidation(error, dispatch, formData);
+      dispatch(hideLoader());
+    }
+  };

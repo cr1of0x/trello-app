@@ -5,8 +5,9 @@ import {
   deleteAllCards,
   moveAllCards,
 } from "../../../redux/thunks/card";
-import { editList } from "../../../redux/thunks/list";
+import { copyOneList, editList } from "../../../redux/thunks/list";
 import { CardForm } from "../../forms/CardForm/CardForm";
+import { CopyListForm } from "../../forms/CopyListForm/CopyListForm";
 import { Card } from "../Card/Card";
 import { Dropdown } from "../DropDown/DropDown";
 import { Modal } from "../Modal/Modal";
@@ -25,6 +26,7 @@ export const List = ({
   const [titleToggle, setTitleToggle] = useState(false);
   const [titleName, setTitleName] = useState(title);
   const [moveCards, setMoveCards] = useState(false);
+  const [copyList, setCopyList] = useState(false);
   const dispatch = useDispatch();
 
   const handleCreateCard = (title, onSucess) => {
@@ -41,6 +43,10 @@ export const List = ({
 
   const moveAllCardsToList = (list_to_id) => {
     dispatch(moveAllCards(list_id, list_to_id, cards, dashboard_id));
+  };
+
+  const handleCopyList = (formData, onSucess) => {
+    dispatch(copyOneList(formData, cards, dashboard_id, onSucess));
   };
 
   const handleBlur = () => {
@@ -89,6 +95,12 @@ export const List = ({
               },
             },
             { title: "Archive all cards", onClick: archiveAllCards },
+            {
+              title: "Copy list",
+              onClick: () => {
+                setCopyList(true);
+              },
+            },
           ]}
         />
       </div>
@@ -98,6 +110,13 @@ export const List = ({
           handleMove={moveAllCardsToList}
           list_id={list_id}
           setMoveCards={setMoveCards}
+        />
+      </Modal>
+      <Modal active={copyList} setActive={setCopyList}>
+        <CopyListForm
+          title={titleName}
+          handleCopyList={handleCopyList}
+          setCopyList={setCopyList}
         />
       </Modal>
 
