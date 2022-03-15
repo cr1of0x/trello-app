@@ -22,10 +22,6 @@ const RegisterForm = ({ handleSubmit }) => {
   const formName = useSelector((state) => state.errors.formName);
   const [formData, setFormData] = useState(initialState);
 
-  useEffect(() => {
-    setFormData({ ...formData, formName: REGISTER_FORM });
-  }, []);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -38,7 +34,7 @@ const RegisterForm = ({ handleSubmit }) => {
     };
 
     try {
-      dispatch(gmail({ ...data, formName: REGISTER_FORM }, navigate));
+      dispatch(gmail(data, navigate, REGISTER_FORM));
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +48,7 @@ const RegisterForm = ({ handleSubmit }) => {
     <form
       className={styles.registerform}
       onSubmit={(e) => {
-        handleSubmit(e, formData);
+        handleSubmit(e, formData, REGISTER_FORM);
       }}
     >
       <h2 className={styles.title}>Sign Up to Trello</h2>

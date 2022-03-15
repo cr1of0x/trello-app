@@ -29,8 +29,8 @@ export const List = ({
   const [copyList, setCopyList] = useState(false);
   const dispatch = useDispatch();
 
-  const handleCreateCard = (title, onSucess) => {
-    dispatch(createCard(list_id, dashboard_id, title, onSucess));
+  const handleCreateCard = (title, onSucess, formName) => {
+    dispatch(createCard(list_id, dashboard_id, title, onSucess, formName));
   };
 
   const archiveList = () => {
@@ -45,8 +45,8 @@ export const List = ({
     dispatch(moveAllCards(list_id, list_to_id, cards, dashboard_id));
   };
 
-  const handleCopyList = (formData, onSucess) => {
-    dispatch(copyOneList(formData, cards, dashboard_id, onSucess));
+  const handleCopyList = (formData, onSucess, formName) => {
+    dispatch(copyOneList(formData, cards, dashboard_id, onSucess, formName));
   };
 
   const handleBlur = () => {
@@ -117,6 +117,7 @@ export const List = ({
           title={titleName}
           handleCopyList={handleCopyList}
           setCopyList={setCopyList}
+          handleCancel={handleCancel}
         />
       </Modal>
 

@@ -15,8 +15,8 @@ export const DashboardDetails = () => {
   const params = useParams();
   const id = params.pathId;
 
-  const handleCreate = (formData, onSucess) => {
-    dispatch(createList(id, formData, onSucess));
+  const handleCreate = (formData, onSucess, formName) => {
+    dispatch(createList(id, formData, onSucess, formName));
   };
 
   const handleCancel = () => {

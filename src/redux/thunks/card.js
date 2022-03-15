@@ -1,15 +1,17 @@
 import * as api from "../../api/index.js";
 import { reduxErrorsValidation } from "../../helpers/reduxErrorsValidation.js";
+import { onSubmit } from "./dashboard.js";
 import { getLists } from "./list.js";
 
 export const createCard =
-  (id, dashboard_id, formData, onSucess) => async (dispatch) => {
+  (id, dashboard_id, formData, onSucess, formName) => async (dispatch) => {
     try {
       await api.cardCreate({ id, formData });
       await dispatch(getLists(dashboard_id));
+      dispatch(onSubmit());
       onSucess();
     } catch (error) {
-      reduxErrorsValidation(error, dispatch, formData);
+      reduxErrorsValidation(error, dispatch, formName);
     }
   };
 

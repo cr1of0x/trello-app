@@ -26,3 +26,21 @@
   cursor: pointer;
   margin: auto;
 }
+
+.cancel {
+  background-color: rgb(159, 123, 255);
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.buttoncontainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  width: 115px;
+  margin-bottom: 3px;
+}

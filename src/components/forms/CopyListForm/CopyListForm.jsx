@@ -7,7 +7,12 @@ const initialState = {
   title: "",
 };
 
-export const CopyListForm = ({ title, handleCopyList, setCopyList }) => {
+export const CopyListForm = ({
+  title,
+  handleCopyList,
+  setCopyList,
+  handleCancel,
+}) => {
   const [formData, setFormData] = useState(initialState);
 
   const errors = useSelector((state) => state.errors.errors);
@@ -22,14 +27,14 @@ export const CopyListForm = ({ title, handleCopyList, setCopyList }) => {
   };
 
   useEffect(() => {
-    setFormData({ ...formData, title, formName: COPY_LIST_FORM });
+    setFormData({ ...formData, title });
   }, []);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        handleCopyList(formData, onSucess);
+        handleCopyList(formData, onSucess, COPY_LIST_FORM);
         setFormData({ ...formData, title });
       }}
       className={styles.form}
@@ -45,7 +50,19 @@ export const CopyListForm = ({ title, handleCopyList, setCopyList }) => {
       <div className={styles.error}>
         {formName === COPY_LIST_FORM && errors.title}
       </div>
-      <input type="submit" value="Copy list" className={styles.button} />
+      <div className={styles.buttoncontainer}>
+        <input type="submit" value="Copy list" className={styles.button} />
+        <button
+          className={styles.cancel}
+          type="button"
+          onClick={() => {
+            handleCancel();
+            setCopyList(false);
+          }}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };
