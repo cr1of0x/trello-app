@@ -20,10 +20,6 @@ export const LoginForm = ({ handleSubmit }) => {
 
   const [formData, setFormData] = useState(initialState);
 
-  useEffect(() => {
-    setFormData({ ...formData, formName: LOGIN_FORM });
-  }, []);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -32,7 +28,7 @@ export const LoginForm = ({ handleSubmit }) => {
     const result = res?.profileObj;
 
     try {
-      dispatch(gmailLogin({ ...result, formName: LOGIN_FORM }, navigate));
+      dispatch(gmailLogin(result, navigate, LOGIN_FORM));
     } catch (error) {
       throw error;
     }
@@ -47,7 +43,7 @@ export const LoginForm = ({ handleSubmit }) => {
     <form
       className={styles.loginform}
       onSubmit={(e) => {
-        handleSubmit(e, formData);
+        handleSubmit(e, formData, LOGIN_FORM);
       }}
     >
       <h2 className={styles.title}>Sign In</h2>

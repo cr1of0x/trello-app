@@ -1,33 +1,37 @@
 import { useState } from "react";
 import styles from "./DropDown.module.css";
 
-export const Dropdown = ({ onClick, options }) => {
+export const Dropdown = ({ options }) => {
   const [isActive, setIsActive] = useState(false);
-  document.addEventListener("click", (e) => {
-    setIsActive(false);
-  });
   return (
     <div
       className={styles.container}
       onClick={(e) => {
         e.stopPropagation();
       }}
+      tabIndex={0}
+      onBlur={() => setIsActive(false)}
     >
-      <div className={styles.button} onClick={(e) => setIsActive(!isActive)}>
+      <div
+        className={styles.button}
+        onClick={() => {
+          setIsActive(!isActive);
+        }}
+      >
         ...
       </div>
       {isActive && (
         <div className={styles.content}>
           {options.map((option) => (
             <div
-              key={option}
-              onClick={(e) => {
-                onClick();
+              key={option.title}
+              onClick={() => {
+                option.onClick();
                 setIsActive(false);
               }}
               className={styles.contentitem}
             >
-              {option}
+              {option.title}
             </div>
           ))}
         </div>

@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createCard } from "../../../redux/thunks/card";
-import { editList } from "../../../redux/thunks/list";
+import {
+  createCard,
+  deleteAllCards,
+  moveAllCards,
+} from "../../../redux/thunks/card";
+import { copyOneList, editList } from "../../../redux/thunks/list";
 import { CardForm } from "../../forms/CardForm/CardForm";
+import { CopyListForm } from "../../forms/CopyListForm/CopyListForm";
 import { Card } from "../Card/Card";
 import { Dropdown } from "../DropDown/DropDown";
+import { Modal } from "../Modal/Modal";
+import { MoveCards } from "../MoveCards/MoveCards";
 import styles from "./List.module.css";
 
 export const List = ({
@@ -14,13 +21,32 @@ export const List = ({
   handleDelete,
   cards,
   handleCancel,
+  lists,
 }) => {
   const [titleToggle, setTitleToggle] = useState(false);
   const [titleName, setTitleName] = useState(title);
+  const [moveCards, setMoveCards] = useState(false);
+  const [copyList, setCopyList] = useState(false);
   const dispatch = useDispatch();
 
-  const handleCreateCard = (title, onSucess) => {
-    dispatch(createCard(list_id, dashboard_id, title, onSucess));
+  const handleCreateCard = (title, onSucess, formName) => {
+    dispatch(createCard(list_id, dashboard_id, title, onSucess, formName));
+  };
+
+  const archiveList = () => {
+    handleDelete(dashboard_id, list_id);
+  };
+
+  const archiveAllCards = () => {
+    dispatch(deleteAllCards(list_id, dashboard_id));
+  };
+
+  const moveAllCardsToList = (list_to_id) => {
+    dispatch(moveAllCards(list_id, list_to_id, cards, dashboard_id));
+  };
+
+  const handleCopyList = (formData, onSucess, formName) => {
+    dispatch(copyOneList(formData, cards, dashboard_id, onSucess, formName));
   };
 
   const handleBlur = () => {
@@ -60,12 +86,40 @@ export const List = ({
           </div>
         )}
         <Dropdown
-          onClick={() => {
-            handleDelete(dashboard_id, list_id);
-          }}
-          options={["Archive this list"]}
+          options={[
+            { title: "Archive this list", onClick: archiveList },
+            {
+              title: "Move all cards in this list",
+              onClick: () => {
+                setMoveCards(true);
+              },
+            },
+            { title: "Archive all cards", onClick: archiveAllCards },
+            {
+              title: "Copy list",
+              onClick: () => {
+                setCopyList(true);
+              },
+            },
+          ]}
         />
       </div>
+      <Modal active={moveCards} setActive={setMoveCards}>
+        <MoveCards
+          lists={lists}
+          handleMove={moveAllCardsToList}
+          list_id={list_id}
+          setMoveCards={setMoveCards}
+        />
+      </Modal>
+      <Modal active={copyList} setActive={setCopyList}>
+        <CopyListForm
+          title={titleName}
+          handleCopyList={handleCopyList}
+          setCopyList={setCopyList}
+          handleCancel={handleCancel}
+        />
+      </Modal>
 
       <div className={styles.cardscontainer}>
         {cards.map((e) => {

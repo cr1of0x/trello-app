@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { CARD_FORM } from "../../../helpers/formNames";
 import styles from "./CardForm.module.css";
@@ -22,10 +22,6 @@ export const CardForm = ({ handleCreate, handleCancel }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    setFormData({ ...formData, formName: CARD_FORM });
-  }, []);
-
   return (
     <div className={styles.container}>
       {toggle ? (
@@ -33,7 +29,7 @@ export const CardForm = ({ handleCreate, handleCancel }) => {
           className={styles.form}
           onSubmit={(e) => {
             e.preventDefault();
-            handleCreate(formData, onSucess);
+            handleCreate(formData, onSucess, CARD_FORM);
             setFormData({ ...formData, title: "" });
           }}
         >

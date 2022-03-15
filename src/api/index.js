@@ -2,14 +2,16 @@ import axios from "axios";
 import {
   ADD_FAVORITE_DASHBOARD,
   CARD_CREATE_URL,
+  CARD_DELETE_ALL,
   CARD_EDIT_URL,
-  CARD_GET_URL,
+  CARD_MOVE_ALL,
   DASHBOARD_CREATE_URL,
   DASHBOARD_DELETE_URL,
   DASHBOARD_EDIT_URL,
   DASHBOARD_GET_URL,
   GMAIL_LOGIN_URL,
   GMAIL_URL,
+  LIST_COPY_URL,
   LIST_CREATE_URL,
   LIST_DELETE_URL,
   LIST_EDIT_URL,
@@ -98,6 +100,27 @@ export const cardCreate = (formData) =>
 
 export const editCard = (data) =>
   API.post(CARD_EDIT_URL, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const deleteAllCards = (id) =>
+  API.post(CARD_DELETE_ALL, id, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const moveAllCards = (data) =>
+  API.post(CARD_MOVE_ALL, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const copyList = (data) =>
+  API.post(LIST_COPY_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

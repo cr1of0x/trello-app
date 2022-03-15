@@ -16,18 +16,19 @@ export const getLists = (id) => async (dispatch) => {
   }
 };
 
-export const createList = (id, formData, onSucess) => async (dispatch) => {
-  try {
-    dispatch(showLoader());
-    await api.createList({ id, formData });
-    await dispatch(getLists(id));
-    dispatch(onSubmit());
-    onSucess();
-  } catch (error) {
-    reduxErrorsValidation(error, dispatch, formData);
-    dispatch(hideLoader());
-  }
-};
+export const createList =
+  (id, formData, onSucess, formName) => async (dispatch) => {
+    try {
+      dispatch(showLoader());
+      await api.createList({ id, formData });
+      await dispatch(getLists(id));
+      dispatch(onSubmit());
+      onSucess();
+    } catch (error) {
+      reduxErrorsValidation(error, dispatch, formName);
+      dispatch(hideLoader());
+    }
+  };
 
 export const deleteList = (dashboard_id, list_id) => async (dispatch) => {
   try {
@@ -47,3 +48,17 @@ export const editList = (id, title) => async (dispatch) => {
     throw error;
   }
 };
+
+export const copyOneList =
+  (formData, cards, dashboard_id, onSucess, formName) => async (dispatch) => {
+    try {
+      dispatch(showLoader());
+      await api.copyList({ formData, cards, dashboard_id });
+      await dispatch(getLists(dashboard_id));
+      dispatch(onSubmit());
+      onSucess();
+    } catch (error) {
+      reduxErrorsValidation(error, dispatch, formName);
+      dispatch(hideLoader());
+    }
+  };

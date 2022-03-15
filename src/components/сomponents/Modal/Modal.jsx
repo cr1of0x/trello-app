@@ -3,11 +3,11 @@ import "./Modal.css";
 export const Modal = ({ active, setActive, children }) => {
   return (
     <div
-      className={active ? "modal active" : "modal"}
+      className={`modal ${active ? "active" : ""}`}
       onClick={() => setActive(false)}
     >
       <div
-        className={active ? "modalcontent active" : "modalcontent"}
+        className={`modalcontent ${active ? "active" : ""}`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}

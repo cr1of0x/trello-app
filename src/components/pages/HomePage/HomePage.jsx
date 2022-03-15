@@ -28,8 +28,8 @@ export const HomePage = () => {
     setDeleteModalActive(false);
   };
 
-  const handleSubmit = (formData) => {
-    dispatch(createDashboard(formData, onSucess));
+  const handleSubmit = (formData, formName) => {
+    dispatch(createDashboard(formData, onSucess, formName));
   };
 
   const handleDelete = (id) => {

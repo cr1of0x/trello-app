@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { DASHBOARD_FORM } from "../../../helpers/formNames";
 import { Input } from "../../сomponents/Input/Input";
@@ -18,16 +18,12 @@ export const DashboardForm = ({ handleSubmit }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    setFormData({ ...formData, formName: DASHBOARD_FORM });
-  }, []);
-
   return (
     <form
       className={styles.dashboardform}
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit(formData);
+        handleSubmit(formData, DASHBOARD_FORM);
         setFormData({ ...formData, title: "", description: "" });
         e.target.reset();
       }}

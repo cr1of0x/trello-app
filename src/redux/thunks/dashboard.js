@@ -32,19 +32,20 @@ export const gettingDashboards = () => async (dispatch) => {
   }
 };
 
-export const createDashboard = (formData, onSucess) => async (dispatch) => {
-  try {
-    dispatch(showLoader());
-    await api.dashboardCreate(formData);
-    await dispatch(gettingDashboards());
-    dispatch(createDashboardToast());
-    dispatch(onSubmit());
-    onSucess();
-  } catch (error) {
-    reduxErrorsValidation(error, dispatch, formData);
-    dispatch(hideLoader());
-  }
-};
+export const createDashboard =
+  (formData, onSucess, formName) => async (dispatch) => {
+    try {
+      dispatch(showLoader());
+      await api.dashboardCreate(formData);
+      await dispatch(gettingDashboards());
+      dispatch(createDashboardToast());
+      dispatch(onSubmit());
+      onSucess();
+    } catch (error) {
+      reduxErrorsValidation(error, dispatch, formName);
+      dispatch(hideLoader());
+    }
+  };
 
 export const deleteDashboard = (id, onSucess) => async (dispatch) => {
   try {
