@@ -6,6 +6,7 @@ import toast from "./toast";
 import dashboards from "./dashboards";
 import errors from "./form";
 import lists from "./lists";
+import dragDrop from "./dragdrop";
 
 export default combineReducers({
   auth,
@@ -14,4 +15,5 @@ export default combineReducers({
   dashboards,
   errors,
   lists,
+  dragDrop,
 });

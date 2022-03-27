@@ -62,3 +62,13 @@ export const copyOneList =
       dispatch(hideLoader());
     }
   };
+
+export const moveList =
+  (draggedList, listToDrop, dashboard_id) => async (dispatch) => {
+    try {
+      await api.moveList({ draggedList, listToDrop, dashboard_id });
+      await dispatch(getLists(dashboard_id));
+    } catch (error) {
+      throw error;
+    }
+  };

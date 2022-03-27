@@ -41,3 +41,39 @@ export const moveAllCards =
       throw error;
     }
   };
+
+export const dragAndDropCard =
+  (card_id, list_from_id, list_to_id, dashboard_id) => async (dispatch) => {
+    try {
+      if (list_from_id !== list_to_id) {
+        await api.dragDropCard({ card_id, list_from_id, list_to_id });
+        await dispatch(getLists(dashboard_id));
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+export const dragAndDropCardOnCard =
+  (dragged_card_id, top_card_id, list_from_id, list_to_id, dashboard_id) =>
+  async (dispatch) => {
+    try {
+      if (list_from_id === list_to_id) {
+        await api.dragDropCardSameList({
+          dragged_card_id,
+          top_card_id,
+          list_to_id,
+        });
+      } else {
+        await api.dragDropCardAnotherList({
+          dragged_card_id,
+          top_card_id,
+          list_from_id,
+          list_to_id,
+        });
+      }
+      await dispatch(getLists(dashboard_id));
+    } catch (error) {
+      throw error;
+    }
+  };

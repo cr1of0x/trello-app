@@ -3,6 +3,9 @@ import {
   ADD_FAVORITE_DASHBOARD,
   CARD_CREATE_URL,
   CARD_DELETE_ALL,
+  CARD_DND_ANOTHER_LIST,
+  CARD_DND_SAME_LIST,
+  CARD_DRAG_AND_DROP,
   CARD_EDIT_URL,
   CARD_MOVE_ALL,
   DASHBOARD_CREATE_URL,
@@ -16,6 +19,7 @@ import {
   LIST_DELETE_URL,
   LIST_EDIT_URL,
   LIST_GET_URL,
+  LIST_MOVE,
   SIGNIN_URL,
   SIGNUP_URL,
 } from "./urls";
@@ -121,6 +125,34 @@ export const moveAllCards = (data) =>
 
 export const copyList = (data) =>
   API.post(LIST_COPY_URL, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const dragDropCard = (data) =>
+  API.post(CARD_DRAG_AND_DROP, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const dragDropCardSameList = (data) =>
+  API.post(CARD_DND_SAME_LIST, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const dragDropCardAnotherList = (data) =>
+  API.post(CARD_DND_ANOTHER_LIST, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const moveList = (data) =>
+  API.post(LIST_MOVE, data, {
     headers: {
       Authorization: "Bearer " + token,
     },

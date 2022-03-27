@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createCard,
   deleteAllCards,
+  dragAndDropCard,
   moveAllCards,
 } from "../../../redux/thunks/card";
-import { copyOneList, editList } from "../../../redux/thunks/list";
+import { copyOneList, editList, moveList } from "../../../redux/thunks/list";
 import { CardForm } from "../../forms/CardForm/CardForm";
 import { CopyListForm } from "../../forms/CopyListForm/CopyListForm";
 import { Card } from "../Card/Card";
@@ -27,6 +28,9 @@ export const List = ({
   const [titleName, setTitleName] = useState(title);
   const [moveCards, setMoveCards] = useState(false);
   const [copyList, setCopyList] = useState(false);
+  const draggedCard = useSelector((state) => state.dragDrop.card);
+  const draggedFromList = useSelector((state) => state.dragDrop.list);
+  const isList = useSelector((state) => state.dragDrop.isList);
   const dispatch = useDispatch();
 
   const handleCreateCard = (title, onSucess, formName) => {
@@ -49,6 +53,12 @@ export const List = ({
     dispatch(copyOneList(formData, cards, dashboard_id, onSucess, formName));
   };
 
+  const dragDropCardOnList = () => {
+    dispatch(
+      dragAndDropCard(draggedCard, draggedFromList, list_id, dashboard_id)
+    );
+  };
+
   const handleBlur = () => {
     if (titleName.length === 0) {
       setTitleName(title);
@@ -60,7 +70,36 @@ export const List = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      draggable={true}
+      onDragStart={(e) => {
+        e.stopPropagation();
+        e.target.classList.add(`${styles.hide}`);
+        dispatch({ type: "DRAG_LIST", data: { isList: true, list: list_id } });
+      }}
+      onDragEnd={(e) => {
+        e.preventDefault();
+        e.target.classList.remove(`${styles.hide}`);
+        dispatch({ type: "DRAG_LIST", data: { isList: false } });
+      }}
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+      onDrop={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!isList) {
+          dragDropCardOnList();
+        } else {
+          dispatch(moveList(draggedFromList, list_id, dashboard_id));
+        }
+        dispatch({
+          type: "DRAG_LIST",
+          data: { isList: false },
+        });
+      }}
+    >
       <div className={styles.container}>
         {titleToggle ? (
           <input
@@ -122,8 +161,19 @@ export const List = ({
       </Modal>
 
       <div className={styles.cardscontainer}>
+        <div className={styles.cardplaceholder}></div>
         {cards.map((e) => {
-          return <Card title={e.title} key={e._id} id={e._id} />;
+          return (
+            <Card
+              title={e.title}
+              key={e._id}
+              id={e._id}
+              list_id={list_id}
+              dragged_card={draggedCard}
+              draggedFromList={draggedFromList}
+              dashboard_id={dashboard_id}
+            />
+          );
         })}
       </div>
       <CardForm handleCancel={handleCancel} handleCreate={handleCreateCard} />

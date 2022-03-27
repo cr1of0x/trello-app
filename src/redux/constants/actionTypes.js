@@ -10,3 +10,4 @@ export const SET_FORM_ERRORS = "SET_FORM_ERRORS";
 export const SET_DASHBOARDS = "SET_DASHBOARDS";
 export const SET_LISTS = "SET_LISTS";
 export const SET_CARDS = "SET_CARDS";
+export const DRAG_CARD = "DRAG_CARD";
