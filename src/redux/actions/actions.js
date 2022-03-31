@@ -3,6 +3,7 @@ import {
   CREATE_DASHBOARD_TOAST,
   DELETE_DASHBOARD_TOAST,
   DRAG_CARD,
+  DRAG_LIST,
   EMAIL,
   HIDE_LOADER,
   LOGOUT,
@@ -62,4 +63,8 @@ export const setCards = (data) => {
 
 export const dragCard = (data) => {
   return { type: DRAG_CARD, data: data };
+};
+
+export const dragList = (data) => {
+  return { type: DRAG_LIST, data: data };
 };

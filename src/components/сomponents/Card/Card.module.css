@@ -9,6 +9,12 @@
   padding: 5px 10px;
   border-radius: 7px;
   margin-top: 5px;
+  box-shadow: 0 1px 0 #091e4240;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgb(241, 240, 240);
 }
 
 .hide {

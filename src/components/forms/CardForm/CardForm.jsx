@@ -5,6 +5,7 @@ import styles from "./CardForm.module.css";
 
 const initialState = {
   title: "",
+  description: "",
 };
 
 export const CardForm = ({ handleCreate, handleCancel }) => {

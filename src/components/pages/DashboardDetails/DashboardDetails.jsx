@@ -16,7 +16,8 @@ export const DashboardDetails = () => {
   const id = params.pathId;
 
   const handleCreate = (formData, onSucess, formName) => {
-    dispatch(createList(id, formData, onSucess, formName));
+    const data = { id, formData, formName };
+    dispatch(createList(data, onSucess));
   };
 
   const handleCancel = () => {
@@ -24,7 +25,8 @@ export const DashboardDetails = () => {
   };
 
   const handleDelete = (dashboard_id, list_id) => {
-    dispatch(deleteList(dashboard_id, list_id));
+    const data = { dashboard_id, list_id };
+    dispatch(deleteList(data));
   };
 
   useEffect(() => {
@@ -48,6 +50,7 @@ export const DashboardDetails = () => {
             />
           );
         })}
+
         <ListForm handleCreate={handleCreate} handleCancel={handleCancel} />
       </div>
     </>

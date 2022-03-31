@@ -1,0 +1,29 @@
+.container {
+  width: 300px;
+}
+
+.descriptionadd {
+  background-color: rgb(245, 245, 245);
+  padding-bottom: 30px;
+  padding-top: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.descriptionadd:hover {
+  background-color: rgb(230, 227, 227);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal {
+  position: absolute;
+  border: 1px solid black;
+}
+
+.modalcontainer {
+  position: relative;
+}

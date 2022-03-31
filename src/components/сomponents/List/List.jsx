@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { dragList } from "../../../redux/actions/actions";
 import {
   createCard,
   deleteAllCards,
@@ -33,8 +34,9 @@ export const List = ({
   const isList = useSelector((state) => state.dragDrop.isList);
   const dispatch = useDispatch();
 
-  const handleCreateCard = (title, onSucess, formName) => {
-    dispatch(createCard(list_id, dashboard_id, title, onSucess, formName));
+  const handleCreateCard = (formData, onSucess, formName) => {
+    const data = { list_id, dashboard_id, formData, formName };
+    dispatch(createCard(data, onSucess));
   };
 
   const archiveList = () => {
@@ -42,21 +44,28 @@ export const List = ({
   };
 
   const archiveAllCards = () => {
-    dispatch(deleteAllCards(list_id, dashboard_id));
+    const data = { list_id, dashboard_id };
+    dispatch(deleteAllCards(data));
   };
 
   const moveAllCardsToList = (list_to_id) => {
-    dispatch(moveAllCards(list_id, list_to_id, cards, dashboard_id));
+    const data = { list_from_id: list_id, list_to_id, cards, dashboard_id };
+    dispatch(moveAllCards(data));
   };
 
   const handleCopyList = (formData, onSucess, formName) => {
-    dispatch(copyOneList(formData, cards, dashboard_id, onSucess, formName));
+    const data = { formData, cards, dashboard_id, formName };
+    dispatch(copyOneList(data, onSucess));
   };
 
   const dragDropCardOnList = () => {
-    dispatch(
-      dragAndDropCard(draggedCard, draggedFromList, list_id, dashboard_id)
-    );
+    const data = {
+      card_id: draggedCard,
+      list_from_id: draggedFromList,
+      list_to_id: list_id,
+      dashboard_id,
+    };
+    dispatch(dragAndDropCard(data));
   };
 
   const handleBlur = () => {
@@ -64,9 +73,37 @@ export const List = ({
       setTitleName(title);
       setTitleToggle(false);
     } else {
-      dispatch(editList(list_id, titleName));
+      const data = { id: list_id, title: titleName };
+      dispatch(editList(data));
       setTitleToggle(false);
     }
+  };
+
+  const dragStartListHandler = (e) => {
+    e.target.classList.add(`${styles.hide}`);
+    dispatch(dragList({ isList: true, list: list_id }));
+  };
+
+  const dragEndListHandler = (e) => {
+    e.preventDefault();
+    e.target.classList.remove(`${styles.hide}`);
+    dispatch(dragList({ isList: false }));
+  };
+
+  const onDropListHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isList) {
+      dragDropCardOnList();
+    } else {
+      const data = {
+        draggedList: draggedFromList,
+        listToDrop: list_id,
+        dashboard_id,
+      };
+      dispatch(moveList(data));
+    }
+    dispatch(dragList({ isList: false }));
   };
 
   return (
@@ -74,30 +111,16 @@ export const List = ({
       className={styles.wrapper}
       draggable={true}
       onDragStart={(e) => {
-        e.stopPropagation();
-        e.target.classList.add(`${styles.hide}`);
-        dispatch({ type: "DRAG_LIST", data: { isList: true, list: list_id } });
+        dragStartListHandler(e);
       }}
       onDragEnd={(e) => {
-        e.preventDefault();
-        e.target.classList.remove(`${styles.hide}`);
-        dispatch({ type: "DRAG_LIST", data: { isList: false } });
+        dragEndListHandler(e);
       }}
       onDragOver={(e) => {
         e.preventDefault();
       }}
       onDrop={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!isList) {
-          dragDropCardOnList();
-        } else {
-          dispatch(moveList(draggedFromList, list_id, dashboard_id));
-        }
-        dispatch({
-          type: "DRAG_LIST",
-          data: { isList: false },
-        });
+        onDropListHandler(e);
       }}
     >
       <div className={styles.container}>
@@ -172,6 +195,8 @@ export const List = ({
               dragged_card={draggedCard}
               draggedFromList={draggedFromList}
               dashboard_id={dashboard_id}
+              list_title={title}
+              description={e.description}
             />
           );
         })}

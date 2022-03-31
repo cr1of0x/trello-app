@@ -1,13 +1,14 @@
 import axios from "axios";
 import {
-  ADD_FAVORITE_DASHBOARD,
+  ADD_FAVORITE_DASHBOARD_URL,
   CARD_CREATE_URL,
-  CARD_DELETE_ALL,
-  CARD_DND_ANOTHER_LIST,
-  CARD_DND_SAME_LIST,
-  CARD_DRAG_AND_DROP,
+  CARD_DELETE_ALL_URL,
+  CARD_DND_ANOTHER_LIST_URL,
+  CARD_DND_SAME_LIST_URL,
+  CARD_DRAG_AND_DROP_URL,
+  CARD_EDIT_DESCRIPTION_URL,
   CARD_EDIT_URL,
-  CARD_MOVE_ALL,
+  CARD_MOVE_ALL_URL,
   DASHBOARD_CREATE_URL,
   DASHBOARD_DELETE_URL,
   DASHBOARD_EDIT_URL,
@@ -19,7 +20,7 @@ import {
   LIST_DELETE_URL,
   LIST_EDIT_URL,
   LIST_GET_URL,
-  LIST_MOVE,
+  LIST_MOVE_URL,
   SIGNIN_URL,
   SIGNUP_URL,
 } from "./urls";
@@ -60,7 +61,7 @@ export const editDashboard = (data) =>
   });
 
 export const favoriteDashboard = (data) =>
-  API.post(ADD_FAVORITE_DASHBOARD, data, {
+  API.post(ADD_FAVORITE_DASHBOARD_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -110,14 +111,14 @@ export const editCard = (data) =>
   });
 
 export const deleteAllCards = (id) =>
-  API.post(CARD_DELETE_ALL, id, {
+  API.post(CARD_DELETE_ALL_URL, id, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 
 export const moveAllCards = (data) =>
-  API.post(CARD_MOVE_ALL, data, {
+  API.post(CARD_MOVE_ALL_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -131,28 +132,35 @@ export const copyList = (data) =>
   });
 
 export const dragDropCard = (data) =>
-  API.post(CARD_DRAG_AND_DROP, data, {
+  API.post(CARD_DRAG_AND_DROP_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 
 export const dragDropCardSameList = (data) =>
-  API.post(CARD_DND_SAME_LIST, data, {
+  API.post(CARD_DND_SAME_LIST_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 
 export const dragDropCardAnotherList = (data) =>
-  API.post(CARD_DND_ANOTHER_LIST, data, {
+  API.post(CARD_DND_ANOTHER_LIST_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 
 export const moveList = (data) =>
-  API.post(LIST_MOVE, data, {
+  API.post(LIST_MOVE_URL, data, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+export const editCardDescription = (data) =>
+  API.post(CARD_EDIT_DESCRIPTION_URL, data, {
     headers: {
       Authorization: "Bearer " + token,
     },
