@@ -1,10 +1,10 @@
 export const PUBLIC_ROUTES = {
-  login: "/login",
-  confirmemail: "/confirmemail",
-  registration: "/registration",
+  login: "/trello-app//login",
+  confirmemail: "/trello-app//confirmemail",
+  registration: "/trello-app//registration",
 };
 export const PRIVATE_ROUTES = {
-  homepage: "/",
-  dashboard: "/dashboard",
-  dashboardDetails: "/b/:pathId",
+  homepage: "/trello-app",
+  dashboard: "/trello-app//dashboard",
+  dashboardDetails: "trello-app/b/:pathId",
 };
