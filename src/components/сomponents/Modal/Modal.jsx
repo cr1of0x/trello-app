@@ -5,6 +5,11 @@ export const Modal = ({ active, setActive, children }) => {
     <div
       className={`modal ${active ? "active" : ""}`}
       onClick={() => setActive(false)}
+      draggable={true}
+      onDragStart={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
     >
       <div
         className={`modalcontent ${active ? "active" : ""}`}

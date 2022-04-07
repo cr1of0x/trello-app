@@ -1,10 +1,36 @@
+.container {
+  margin-top: 5px;
+}
+
 .card {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
   background-color: #fff;
   padding: 5px 10px;
   border-radius: 7px;
+  margin-top: 5px;
+  box-shadow: 0 1px 0 #091e4240;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgb(241, 240, 240);
+}
+
+.hide {
+  transition: 0.01s;
+  transform: translateX(-9999px);
+}
+
+.placeholder {
+  margin-top: 5px;
+  background-color: rgb(187, 186, 186);
+  padding: 12px;
+  border-radius: 7px;
+}
+
+.hideplaceholder {
+  display: none;
 }
 
 .pencil {

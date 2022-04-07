@@ -3,6 +3,11 @@
   justify-content: space-between;
 }
 
+.hide {
+  transition: 0.01s;
+  transform: translateX(-9999px);
+}
+
 .wrapper {
   align-self: flex-start;
   justify-content: space-between;
