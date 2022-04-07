@@ -6,5 +6,5 @@ export const PUBLIC_ROUTES = {
 export const PRIVATE_ROUTES = {
   homepage: "/trello-app",
   dashboard: "/trello-app/dashboard",
-  dashboardDetails: "/b/:pathId",
+  dashboardDetails: "trello-app//b/:pathId",
 };
