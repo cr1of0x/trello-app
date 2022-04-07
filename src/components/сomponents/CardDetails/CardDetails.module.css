@@ -1,5 +1,20 @@
 .container {
-  width: 300px;
+  width: 500px;
+}
+
+.titlecontainer {
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.titleinput {
+  font-size: 19px;
+  margin-left: 15px;
+}
+
+.titleicon {
+  font-size: 25px;
 }
 
 .descriptionadd {
@@ -15,7 +30,8 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 25px;
+  margin-left: 15px;
   font-weight: bold;
 }
 

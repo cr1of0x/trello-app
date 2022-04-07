@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { editCard, editDescriptionCard } from "../../../redux/thunks/card";
 import { CardDescriptionForm } from "../../forms/CardDescriptionForm/CardDescriptionForm";
 import styles from "./CardDetails.module.css";
+import { FaRegCreditCard } from "react-icons/fa";
 
 export const CardDetails = ({
   title,
@@ -44,29 +45,32 @@ export const CardDetails = ({
       }}
       className={styles.container}
     >
-      {titleToggle ? (
-        <input
-          className={styles.titleinput}
-          value={titleName}
-          onChange={(e) => {
-            setTitleName(e.target.value);
-          }}
-          onBlur={() => {
-            handleBlur();
-          }}
-          autoFocus={true}
-          maxLength={12}
-        />
-      ) : (
-        <div
-          className={styles.title}
-          onClick={() => {
-            setTitleToggle(true);
-          }}
-        >
-          {titleName}
-        </div>
-      )}
+      <div className={styles.titlecontainer}>
+        <FaRegCreditCard className={styles.titleicon} />
+        {titleToggle ? (
+          <input
+            className={styles.titleinput}
+            value={titleName}
+            onChange={(e) => {
+              setTitleName(e.target.value);
+            }}
+            onBlur={() => {
+              handleBlur();
+            }}
+            autoFocus={true}
+            maxLength={12}
+          />
+        ) : (
+          <div
+            className={styles.title}
+            onClick={() => {
+              setTitleToggle(true);
+            }}
+          >
+            {titleName}
+          </div>
+        )}
+      </div>
       <div
         tabIndex={0}
         onBlur={() => setListModal(false)}
