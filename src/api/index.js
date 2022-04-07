@@ -25,7 +25,7 @@ import {
   SIGNUP_URL,
 } from "./urls";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "https://api-trello-app.herokuapp.com/" });
 const token = localStorage.getItem("token");
 
 export const signUp = (formData) => API.post(SIGNUP_URL, formData);
