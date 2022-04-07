@@ -1,0 +1,85 @@
+.cardbutton {
+  width: 270px;
+  margin: 8px 0 5px 3px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(235, 236, 240);
+  text-align: start;
+  padding: 7px;
+  color: gray;
+}
+
+.cardbutton:hover {
+  background-color: rgba(228, 226, 226, 0.938);
+}
+
+.cardbutton:active {
+  background-color: rgba(218, 218, 218, 0.938);
+}
+
+.container {
+  display: flex;
+  flex-flow: row;
+}
+
+.form {
+}
+
+.error {
+  margin: 5px 0;
+  height: 10px;
+  color: red;
+  font-size: 10px;
+}
+
+.buttoncontainer {
+  display: flex;
+  justify-content: space-between;
+  width: 115px;
+  margin-bottom: 3px;
+}
+
+.add {
+  width: 300px;
+  text-align: start;
+  padding: 10px;
+  cursor: pointer;
+  background-color: rgb(235, 236, 240);
+  border-radius: 5px;
+  border: 1px solid rgb(219, 218, 218);
+}
+
+.add:hover {
+  background-color: rgba(241, 241, 241, 0.938);
+}
+
+.add:active {
+  background-color: rgb(212, 214, 214);
+}
+
+.title {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.ok {
+  background-color: rgb(159, 123, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: rgb(159, 123, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 8px;
+  color: white;
+  cursor: pointer;
+}

@@ -1,0 +1,150 @@
+.registerform {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgb(159, 123, 255);
+    padding: 10px;
+}
+
+.google {
+    display: block;
+    width: 40px;
+    margin: 15px auto 0;
+    box-shadow: none;
+    transition: 0.2s ease all;
+} 
+
+.google:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.title {
+    margin: 20px auto 0;
+    color: rgb(159, 123, 255);
+    font-size: 30px;
+}
+
+.inputgroup {
+    position: relative;
+    margin: 20px auto 10px;
+  }
+  
+  .input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(247, 239, 248);
+  }
+  
+  .input:focus {
+    outline: none;
+  }
+  
+  .label {
+    color: black;
+    font-size: 14px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  
+  .input:focus ~ label,
+  .input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: rgb(159, 123, 255);
+  }
+  
+  .bar {
+    position: relative;
+    display:block;
+    width:315px;
+  }
+  
+  .bar:before,
+  .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: rgb(159, 123, 255);
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  
+  .bar:before {
+    left: 50%;
+  }
+  
+  .bar:after {
+    right: 50%;
+  }
+  
+  .input:focus ~ .bar:before,
+  .input:focus ~ .bar:after {
+    width: 50%;
+  }
+  
+  .highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  .input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+  }
+  
+  @-webkit-keyframes inputHighlighter {
+    from { background: rgb(159, 123, 255); }
+    to   { width: 0; background: transparent; }
+  }
+  @-moz-keyframes inputHighlighter {
+    from { background: rgb(159, 123, 255); }
+    to   { width: 0; background: transparent; }
+  }
+  @keyframes inputHighlighter {
+    from { background: rgb(159, 123, 255); }
+    to   { width: 0; background: transparent; }
+  }
+
+  .submit {
+      border: none;
+      width: 80px;
+      padding: 10px;
+      margin: auto;
+      border-radius: 10px;
+      background-color: rgb(159, 123, 255);
+      color: whitesmoke;
+      transition: 0.2s ease all;
+  } 
+
+  .submit:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+  }
+
+  .error {
+    height: 7px;
+    color: red;
+    font-size: 10px;
+  }

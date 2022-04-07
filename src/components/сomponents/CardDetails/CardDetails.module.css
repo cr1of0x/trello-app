@@ -1,0 +1,45 @@
+.container {
+  width: 500px;
+}
+
+.titlecontainer {
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.titleinput {
+  font-size: 19px;
+  margin-left: 15px;
+}
+
+.titleicon {
+  font-size: 25px;
+}
+
+.descriptionadd {
+  background-color: rgb(245, 245, 245);
+  padding-bottom: 30px;
+  padding-top: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.descriptionadd:hover {
+  background-color: rgb(230, 227, 227);
+}
+
+.title {
+  font-size: 25px;
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+.modal {
+  position: absolute;
+  border: 1px solid black;
+}
+
+.modalcontainer {
+  position: relative;
+}

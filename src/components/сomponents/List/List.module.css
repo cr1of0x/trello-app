@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hide {
+  transition: 0.01s;
+  transform: translateX(-9999px);
+}
+
+.wrapper {
+  align-self: flex-start;
+  justify-content: space-between;
+  width: 300px;
+  border: 1px gray solid;
+  border-radius: 5px;
+  padding: 7px;
+  margin-left: 10px;
+  background-color: rgb(235, 236, 240);
+}
+.title {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.cardscontainer {
+  margin-top: 5px;
+}

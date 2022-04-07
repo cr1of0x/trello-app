@@ -1,0 +1,40 @@
+.login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 140px;
+  padding: 11px;
+}
+
+.infoblock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 400px;
+  background-color: rgb(159, 123, 255);
+}
+
+.info {
+  text-align: center;
+  margin-top: 120px;
+  font-size: 30px;
+  color: whitesmoke;
+}
+
+.button {
+  border: 1px solid whitesmoke;
+  width: 80px;
+  padding: 10px;
+  margin: 15px auto 10px;
+  border-radius: 10px;
+  background-color: rgb(159, 123, 255);
+  color: whitesmoke;
+  transition: 0.2s ease all;
+}
+
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

@@ -1,0 +1,48 @@
+.container {
+  margin-top: 5px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 7px;
+  margin-top: 5px;
+  box-shadow: 0 1px 0 #091e4240;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgb(241, 240, 240);
+}
+
+.hide {
+  transition: 0.01s;
+  transform: translateX(-9999px);
+}
+
+.placeholder {
+  margin-top: 5px;
+  background-color: rgb(187, 186, 186);
+  padding: 12px;
+  border-radius: 7px;
+}
+
+.hideplaceholder {
+  display: none;
+}
+
+.pencil {
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.pencil:hover {
+  background-color: rgba(228, 226, 226, 0.938);
+}
+
+.pencil:active {
+  background-color: rgba(218, 218, 218, 0.938);
+}
