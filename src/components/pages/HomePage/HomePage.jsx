@@ -71,11 +71,7 @@ export const HomePage = () => {
         ) : (
           dashboards.map((e) => {
             return (
-              <Link
-                className={styles.link}
-                key={e._id}
-                to={`trello-app/b/${e._id}`}
-              >
+              <Link className={styles.link} key={e._id} to={`/b/${e._id}`}>
                 <Dashboard
                   key={e._id}
                   id={e._id}
